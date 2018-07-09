@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import rs.gecko.assessment.bootstrap.services.CityService;
+
 import rs.gecko.assessment.domain.City;
+import rs.gecko.assessment.services.CityService;
 import rs.gecko.repositories.CityRepository;
 
 @Service

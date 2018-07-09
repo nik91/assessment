@@ -1,4 +1,4 @@
-package rs.gecko.assessment.bootstrap.services;
+package rs.gecko.assessment.services;
 
 import java.util.List;
 

@@ -5,8 +5,8 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import rs.gecko.assessment.bootstrap.services.CityService;
 import rs.gecko.assessment.domain.City;
+import rs.gecko.assessment.services.CityService;
 @Component
 public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedEvent>{
 

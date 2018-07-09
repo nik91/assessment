@@ -9,4 +9,8 @@ public class IndexController {
     public String loginForm(){
         return "login";
     }
+	@RequestMapping("/sities")
+	public String sities() {
+		return "cities";
+	}
 }
