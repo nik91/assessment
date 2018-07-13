@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Core Online Tutorial - List Users</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+
+<!-- Theme style -->
+<link rel="stylesheet" href="../../../css/adminlte.css">
+<!-- Google Font: Source Sans Pro -->
+<link
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+	rel="stylesheet">
+</head>
+<body>
+	<!-- <div class="container">
+		<div th:if="${not #lists.isEmpty(cityDetails)}">
+
+
+			<div class="col-12 col-sm-6 col-md-3" th:each="cityDetail : ${cityDetails}">
+				<div class="info-box mb-3">
+					<span class="info-box-icon bg-warning elevation-1"><i
+						class="fa fa-map-marker"></i></span>
+
+					<div class="info-box-content">
+
+						<span class="info-box-text" th:text="${cityDetail.city}">New Members</span>
+						<span class="info-box-number" th:text="${cityDetail.temperature}">2,000</span>
+						<span class="info-box-text" th:text="${cityDetail.lat}">New	Members</span>
+						<span class="info-box-text" th:text="${cityDetail.lon}">New Members</span>
+						<span class="info-box-number">2,000</span>
+						<span class="info-box-number">2,000</span>
+					</div>
+					/.info-box-content
+				</div>
+				/.info-box
+			</div> -->
+
+
+
+
+
+
+
+
+
+	<div class="content-wrapper" style="margin-left: 0px !important">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0 text-dark">Cities</h1>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+		<section class="content">
+			<div class="container-fluid">
+				<!-- Info boxes -->
+				<div class="row" th:if="${not #lists.isEmpty(cityDetails)}">
+					<div class="col-12 col-sm-6 col-md-3" th:each="cityDetail : ${cityDetails}">
+            		<div class="info-box">
+						<span class="info-box-icon bg-success elevation-1"><i
+							class="fa fa-map-marker"></i></span>
+
+						<div class="info-box-content">
+							<span class="info-box-text" th:text="'City: ' + ${cityDetail.city}"></span>
+							<span class="info-box-number" th:text="'Temperature: ' + ${cityDetail.temperature}"></span>
+							<span class="info-box-text" th:text="'Lantitude: ' + ${cityDetail.lat}"></span>
+							<span class="info-box-text" th:text="'Longitude: ' + ${cityDetail.lon}"></span>
+						</div>
+
+					</div>
+
+				</div>
+
+
+				<!-- fix for small devices only -->
+				<div class="clearfix hidden-md-up"></div>
+
+
+
+
+			</div>
+	</div>
+
+	</section>
+
+
+
+
+
+</body>
+</html>

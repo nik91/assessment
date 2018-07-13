@@ -69,12 +69,12 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 
 	private void loadUsers() {
 		User user = new User();
-		user.setUserName("karec91@gmail.com");
+		user.setUsername("karec91@gmail.com");
 		user.setPassword("nikola91");
 		userService.saveOrUpdate(user);
 
 		User user1 = new User();
-		user1.setUserName("nikolak@gecko.rs");
+		user1.setUsername("nikolak@gecko.rs");
 		user1.setPassword("nikola91");
 		userService.saveOrUpdate(user1);
 	}

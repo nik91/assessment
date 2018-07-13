@@ -17,6 +17,7 @@ public class IndexController {
 	@Autowired
 	private CityService cityService;
 
+
 	/*
 	 * @RequestMapping("login") public String loginForm(){ return "login"; }
 	 */
