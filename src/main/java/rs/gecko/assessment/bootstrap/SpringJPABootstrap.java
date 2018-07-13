@@ -92,6 +92,12 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 		map1.setUrl("https://nominatim.openstreetmap.org/search/");
 		mapService.saveOrUpdate(map1);
 
+		Maps map2 = new Maps();
+		map2.setEnabled(false);
+		map2.setParametars("?format=json");
+		map2.setUrl("https://nominatim.openstreetmap.org/search/");
+		mapService.saveOrUpdate(map2);
+
 		Weather weather = new Weather();
 		weather.setEnabled(true);
 		weather.setApiKey("5cf206b12a8b4ca9e171d70bdb6be856");
@@ -111,16 +117,24 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 	private void loadCities() {
 
 		City city = new City();
-		city.setName("Kragujevac");
+		city.setName("Belgrede");
+		city.setState("rs");
 		cityService.saveOrUpdate(city);
 
 		City city1 = new City();
 		city1.setName("Novi Sad");
+		city1.setState("rs");
 		cityService.saveOrUpdate(city1);
 
 		City city2 = new City();
 		city2.setName("Gornji Milanovac");
+		city2.setState("rs");
 		cityService.saveOrUpdate(city2);
+
+		City city3 = new City();
+		city3.setName("Beograd");
+		city3.setState("rs");
+		cityService.saveOrUpdate(city3);
 
 	}
 

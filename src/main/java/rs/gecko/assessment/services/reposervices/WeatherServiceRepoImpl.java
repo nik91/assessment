@@ -9,6 +9,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.domain.api.Weather;
 import rs.gecko.assessment.externalservices.weather.WeatherParam;
 import rs.gecko.assessment.services.WeatherService;
@@ -52,15 +53,23 @@ public class WeatherServiceRepoImpl implements WeatherService {
 	}
 
 	@Override
-	public WeatherParam getData(String city) {
+	public WeatherParam getData(City city) {
 
 		Weather WeatherApi = findEnabled(true);
-		System.out.println(WeatherApi.toString());
+		// System.out.println(WeatherApi.toString());
 		WeatherParam watherParam = new WeatherParam();
 
-		if (city != null) {
-			watherParam = this.restTemplate.getForObject(WeatherApi.toString(), WeatherParam.class, city);
-			System.out.println(watherParam.getId() + " " + watherParam.getMain().getTemp());
+		if (city != null && WeatherApi != null) {
+			try {
+				watherParam = this.restTemplate.getForObject(WeatherApi.toString(), WeatherParam.class,
+						city.toString());
+				System.out.println(watherParam.getId() + " " + watherParam.getMain().getTemp());
+			} catch (Exception e) {
+				return watherParam;
+			}
+
+			// System.out.println(watherParam.getId() + " " +
+			// watherParam.getMain().getTemp());
 
 		}
 

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Core Online Tutorial - List Users</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+
+<!-- Theme style -->
+<link rel="stylesheet" href="../../../css/adminlte.css">
+<!-- Google Font: Source Sans Pro -->
+<link
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+	rel="stylesheet">
+</head>
+<body>
+
+	<div class="card">
+		<div class="card-header">
+			<h3 class="card-title">Admin panel</h3>
+		</div>
+
+
+		<div class="content-wrapper" style="margin-left: 0px !important">
+			<!-- Content Header (Page header) -->
+			<div class="content-header">
+				<div class="container-fluid">
+					<div class="row mb-2">
+						<div class="col-sm-6">
+							<h1 class="m-0 text-dark">Cities</h1>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+			<section class="content">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-8">
+							<!-- Info boxes -->
+							<div class="row" th:if="${not #lists.isEmpty(cityDetails)}">
+								<div class="col-12 col-sm-6 col-md-3"
+									th:each="cityDetail : ${cityDetails}">
+									<div class="info-box">
+										<span class="info-box-icon bg-success elevation-1"><i
+											class="fa fa-map-marker"></i></span>
+
+										<div class="info-box-content">
+											<span class="info-box-text"
+												th:text="'City: ' + ${cityDetail.city}"></span> <span
+												class="info-box-number"
+												th:text="'Temperature: ' + ${cityDetail.temperature}"></span>
+											<span class="info-box-text"
+												th:text="'Lantitude: ' + ${cityDetail.lat}"></span> <span
+												class="info-box-text"
+												th:text="'Longitude: ' + ${cityDetail.lon}"></span>
+										</div>
+
+									</div>
+
+								</div>
+
+
+								<!-- fix for small devices only -->
+								<div class="clearfix hidden-md-up"></div>
+
+
+
+
+							</div>
+						</div>
+						<div class="col-md-4">
+
+
+
+							<div
+								th:class="${config} < 1 ? 'info-box mb-3 bg-danger' : (${mapconfig} < 1 ? 'info-box mb-3 bg-danger': (${weatherconfig} < 1 ? 'info-box mb-3 bg-danger':'info-box mb-3 bg-success'))">
+								<span class="info-box-icon"><i class="fa fa-gear"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Configs</span> <strong
+										th:text="${config}">2</strong> <span>(Map:</span> <a href="#"><strong
+										th:text="${mapconfig}"></strong></a> <span>, Weather:</span> <a
+										href="#"><strong th:text="${weatherconfig}"></strong></a> <span>)</span>
+								</div>
+								<!-- /.info-box-content -->
+							</div>
+							<!-- /.info-box -->
+							<div
+								th:class="${countofcities} < 4 ? (${countofcities} < 1 ? 'info-box mb-3 bg-danger':'info-box mb-3 bg-warning') : 'info-box mb-3 bg-success'">
+								<span class="info-box-icon"><i class="fa fa-map-signs"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text">Cities</span> <span
+										class="info-box-number" th:text=${countofcities}>2</span>
+								</div>
+
+							</div>
+
+
+							<div th:if="${activeWetherConfig}"
+								th:class="${weatherconfig} > 0 ? 'info-box mb-3 bg-warning' : 'info-box mb-3 bg-danger'">
+								<span class="info-box-icon"><i class="fa fa-cloud"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text"
+										th:text="${weatherconfig} > 0 ? 'There is unactive Weather config.' : 'Please create Weather config.'">Cities</span>
+									<span class="info-box-number" th:text=${weatherconfig}>2</span>
+								</div>
+
+							</div>
+
+
+							<div th:if="${activeMapConfig}"
+								th:class="${mapconfig} > 0 ? 'info-box mb-3 bg-warning' : 'info-box mb-3 bg-danger'">
+								<span class="info-box-icon"><i class="fa fa-map-o"></i></span>
+
+								<div class="info-box-content">
+									<span class="info-box-text"
+										th:text="${mapconfig} > 0 ? 'There is unactive Map config.' : 'Please create Map config.'">Cities</span>
+									<span class="info-box-number" th:text=${mapconfig}>2</span>
+								</div>
+
+							</div>
+
+
+
+
+						</div>
+					</div>
+
+
+
+
+
+
+
+
+				</div>
+			</section>
+		</div>
+
+	</div>
+
+	<footer class="main-footer" style="margin-left: 0px !important">
+
+	</footer>
+
+</body>
+</html>

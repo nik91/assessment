@@ -1,11 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>AdminLTE 3 | Advanced form elements</title>
-<!-- Tell the browser to be responsive to screen width -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spring Core Online Tutorial - List Users</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <!-- Font Awesome -->
 <link rel="stylesheet"
@@ -13,120 +10,119 @@
 <!-- Ionicons -->
 <link rel="stylesheet"
 	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
-
+	<script src="../../js/jquery/jquery.min.js"></script>
+<link rel="stylesheet" href="../../css/dataTables.bootstrap4.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="../../css/adminlte.css">
+<link rel="stylesheet" href="../../../css/adminlte.css">
 <!-- Google Font: Source Sans Pro -->
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
 	rel="stylesheet">
+
 </head>
-<body class="hold-transition sidebar-mini">
-	<div class="wrapper">
+<body>
 
+<div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Admin panel</h3>
+            </div>
+            
 
-
-
-
-
-		<!-- Main Sidebar Container -->
-
-
-
-		<!-- Content Wrapper. Contains page content -->
-		<div class="content-wrapper">
-			<!-- Content Header (Page header) -->
-			<section class="content-header">
-				<div class="container-fluid">
-					<div class="row mb-2">
-						<div class="col-sm-6">
-							<h1>Advanced Form</h1>
-						</div>
-						<div class="col-sm-6">
-							<ol class="breadcrumb float-sm-right">
-								<li class="breadcrumb-item"><a href="#">Home</a></li>
-								<li class="breadcrumb-item active">Advanced Form</li>
-							</ol>
-						</div>
+	<div class="content-wrapper" style="margin-left: 0px !important">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0 text-dark">Cities list</h1>
 					</div>
+
 				</div>
-				<!-- /.container-fluid -->
-			</section>
-
-			<!-- Main content -->
-			<section class="content">
-				<div class="container-fluid">
-					<!-- SELECT2 EXAMPLE -->
-					<div class="card card-default">
-						<div class="card-header">
-							<h3 class="card-title">Select2</h3>
-
-							<!-- /.card-header -->
-							<div class="card-body">
-								<div class="row">
-									<div class="col-md-3">
-										<div class="form-group">
-											<label>Minimal</label> <select class="form-control select2"
-												style="width: 100%;" id="states-dropdown">
-
-											</select>
-										</div>
-									</div>
-								</div>
-								<!-- /.row -->
-							</div>
-							<!-- /.card-body -->
-							<div class="card-footer">
-								Visit <a href="https://select2.github.io/">Select2
-									documentation</a> for more examples and information about the
-								plugin.
-							</div>
-						</div>
-						<!-- /.card -->
-
-
-					</div>
-					<!-- /.container-fluid -->
-			</section>
-			<!-- /.content -->
-		</div>
-		<!-- /.content-wrapper -->
-		<footer class="main-footer">
-			<div class="float-right d-none d-sm-block">
-				<b>Version</b> 3.0.0-alpha
 			</div>
-			<strong>Copyright &copy; 2014-2018 <a
-				href="http://adminlte.io">AdminLTE.io</a>.
-			</strong> All rights reserved.
-		</footer>
+		</div>
 
-		<!-- Control Sidebar -->
-		<aside class="control-sidebar control-sidebar-dark">
-			<!-- Control sidebar content goes here -->
-		</aside>
-		<!-- /.control-sidebar -->
+
+
+
+
+
+		<section class="content">
+
+					
+					
+					
+					
+		<div class="row">
+        <div class="col-12">
+          
+		<div class="card">
+            
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped" th:if="${not #lists.isEmpty(cityDetails)}">
+                <thead>
+                <tr>
+                  <th>City Name</th>
+                  <th>Cordinate</th>
+                  <th>Cordinate</th>
+                  <th>Temperature</th>
+                  <th>Edit</th>
+            	  <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cityDetail : ${cityDetails}" >
+                  <td th:text="${cityDetail.city}">Other browsers</td>
+                  <td th:text="${cityDetail.lat}">All others</td>
+                  <td th:text="${cityDetail.lon}">-</td>
+                  <td th:text="${cityDetail.temperature}">-</td>
+                  <td th:text="${cityDetail.city}">U</td>
+                  <td th:text="${cityDetail.city}">U</td>
+                  
+                  
+                                   
+                  
+                  
+                  
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                 <th>City Name</th>
+                  <th>Cordinate</th>
+                  <th>Cordinate</th>
+                  <th>Temperature</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+					
+					
+					
+
+		</section>
 	</div>
-	<!-- ./wrapper -->
 
-	<!-- jQuery -->
-	<script src="../../js/jquery/jquery.min.js"></script>
+</div>
+
+	<footer class="main-footer" style="margin-left: 0px !important">
+
+	</footer>
 
 
-	<script>
-		let dropdown = $('#states-dropdown');
-
-		dropdown.empty();
-
-		//dropdown.append('<option selected="true" disabled>Choose State/Province</option>');
-		dropdown.prop('selectedIndex', 0);
-
-		$.getJSON("../../json/states.json", function(data) {
-			$.each(data, function(key, entry) {
-				dropdown.append($('<option></option>')
-						.attr('value', entry.name).text(entry.name));
-			})
-		});
-	</script>
 </body>
+<script src="../../js/jquery.dataTables.js"></script>
+<script src="../../js/dataTables.bootstrap4.js"></script>
+<script>
+  $(function () {
+    $("#example1").DataTable();
+  });
+</script>
 </html>

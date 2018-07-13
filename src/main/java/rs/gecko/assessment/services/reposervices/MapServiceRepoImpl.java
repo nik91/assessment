@@ -9,6 +9,7 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.domain.api.Maps;
 import rs.gecko.assessment.externalservices.maps.Location;
 import rs.gecko.assessment.services.MapService;
@@ -51,17 +52,24 @@ public class MapServiceRepoImpl implements MapService{
 	}
 
 	@Override
-	public Location getData(String city) {
+	public Location getData(City city) {
 		Maps mapsApi = findEnabled(true);
-		System.out.println(mapsApi.toString());
+		// System.out.println(mapsApi.toString());
 		Location[] location = new Location[1];
 
-		if (city != null) {
-			location = this.restTemplate.getForObject(mapsApi.toString(), Location[].class, city);
-			//System.out.println(locations.getLocationss().get(0).getLat()+ " " + location.getLocationss().get(0).getLoc());
+		if (city != null && mapsApi != null) {
+
+			try {
+				location = this.restTemplate.getForObject(mapsApi.toString(), Location[].class, city.toString());
+			} catch (Exception e) {
+				return location[0];
+			}
 
 		}
 
+		if (location.length < 1) {
+			return null;
+		}
 		return location[0];
 	}
 

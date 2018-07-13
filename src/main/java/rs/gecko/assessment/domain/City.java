@@ -14,6 +14,7 @@ public class City implements DomainObject{
 	
 	private String name;
 
+	private String state;
 
 	public Integer getId() {
 		return id;
@@ -29,6 +30,35 @@ public class City implements DomainObject{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the state
+	 */
+	public String getState() {
+		return state;
+	}
+
+	/**
+	 * @param state
+	 *            the state to set
+	 */
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		if (state != null && !state.isEmpty()) {
+			return name + "," + state;
+		}
+
+		return name;
 	}
 	
 }

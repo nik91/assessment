@@ -6,9 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import rs.gecko.assessment.commands.CityForm;
+import rs.gecko.assessment.converters.CityFormToCity;
 import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.domain.CityDetails;
 import rs.gecko.assessment.externalservices.maps.Location;
@@ -28,6 +32,9 @@ public class CityServiceRepoImpl implements CityService {
 	private MapService mapService;
 	@Autowired
 	private WeatherService weatherService;
+
+	@Autowired
+	private CityFormToCity cityFormToCity;
 
 	@Override
 	public List<?> listAll() {
@@ -57,13 +64,15 @@ public class CityServiceRepoImpl implements CityService {
 
 		cityDetail.setCity(citie.getName());
 
-		Location location = mapService.getData(citie.getName());
+		Location location = mapService.getData(citie);
+		if (location != null) {
 		cityDetail.setLat(round(location.getLat(), 5));
 		cityDetail.setLon(round(location.getLon(), 5));
-
-		WeatherParam weatherParam = weatherService.getData(citie.getName());
+		}
+		WeatherParam weatherParam = weatherService.getData(citie);
+		if (weatherParam.getMain().getTemp() != null) {
 		cityDetail.setTemperature(round(weatherParam.getMain().getTemp() - 273, 2));
-
+		}
 		return cityDetail;
 	}
 
@@ -74,5 +83,11 @@ public class CityServiceRepoImpl implements CityService {
 		BigDecimal bd = new BigDecimal(value);
 		bd = bd.setScale(places, RoundingMode.HALF_UP);
 		return bd.doubleValue();
+	}
+
+	@Override
+	public City saveOrUpdateCityForm(@Valid CityForm cityForm) {
+		City city = cityFormToCity.convert(cityForm);
+		return saveOrUpdate(city);
 	}
 }

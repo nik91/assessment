@@ -22,10 +22,10 @@ public class IndexController {
 	 * @RequestMapping("login") public String loginForm(){ return "login"; }
 	 */
 
-	@RequestMapping("/cities")
-	public String sities() {
-		return "cities";
-	}
+	// @RequestMapping("/cities")
+	// public String sities() {
+	// return "pages/cities";
+	// }
 
 	@RequestMapping("/")
 	public String index(Model model) {
