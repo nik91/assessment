@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -60,7 +60,17 @@
 						<div class="card-header">
 							<h3 class="card-title">City</h3>
 							<div class="card-body">
-								<form th:object="${cityForm}" th:action="@{/cities}" method="post">
+								<form th:object="${cityForm}" th:action="@{/cities}"
+									method="post">
+									<div class="row" th:if="${error != null}">
+										<div class="info-box mb-3 bg-danger">
+											<span class="info-box-number" th:text="'Temperature: ' + ${error.temperature}"></span>
+											<span class="info-box-text" th:text="'Lantitude: ' + ${error.lat}"></span>
+											<span class="info-box-text" th:text="'Longitude: ' + ${error.lon}"></span>
+										</div>
+
+
+									</div>
 									<div class="row">
 
 										<div class="col-md-3">
@@ -75,8 +85,7 @@
 													placeholder="City Name">
 											</div>
 											<div class="form-group">
-												<label>State</label> 
-												<select class="form-control select2"
+												<label>State</label> <select class="form-control select2"
 													style="width: 100%; height: 34px !important;"
 													id="states-dropdown" name="State">
 
@@ -124,7 +133,8 @@
 
 		dropdown.empty();
 
-		dropdown.append('<option selected="true" disabled>Choose State</option>');
+		dropdown
+				.append('<option selected="true" disabled>Choose State</option>');
 		dropdown.prop('selectedIndex', 0);
 
 		$.getJSON("../../json/states.json", function(data) {

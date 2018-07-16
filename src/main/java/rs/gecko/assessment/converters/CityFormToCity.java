@@ -12,6 +12,7 @@ public class CityFormToCity implements Converter<CityForm, City> {
 	@Override
 	public City convert(CityForm cityForm) {
 		City city = new City();
+		city.setId(cityForm.getId());
 		city.setName(cityForm.getCityName());
 		city.setState(cityForm.getState());
 		return city;

@@ -9,6 +9,7 @@ public class CityForm {
 	@NotEmpty
 	private String cityName;
 	private String state;
+	private Integer id;
 
 	/**
 	 * @return the cityName
@@ -40,6 +41,20 @@ public class CityForm {
 		this.state = state;
 	}
 
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id
+	 *            the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 
 

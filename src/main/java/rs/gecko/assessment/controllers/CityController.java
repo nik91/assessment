@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import rs.gecko.assessment.commands.CityForm;
+import rs.gecko.assessment.converters.CityFormToCity;
 import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.domain.CityDetails;
 import rs.gecko.assessment.services.CityService;
@@ -23,6 +24,9 @@ public class CityController {
 	@Autowired
 	private CityService cityService;
 
+
+	@Autowired
+	private CityFormToCity cityFormToCity;
 
 	@RequestMapping("/cities")
 	public String cities(Model model) {
@@ -45,20 +49,29 @@ public class CityController {
 
 	@RequestMapping("/cities/new")
 	public String newProduct(Model model) {
-		model.addAttribute("productForm", new CityForm());
-		return "pages/cities";
+		model.addAttribute("cityForm", new CityForm());
+		return "pages/cityform";
 	}
 
 	@RequestMapping(value = "/cities", method = RequestMethod.POST)
-	public String saveOrUpdateProduct(@Valid CityForm cityForm, BindingResult bindingResult) {
+	public String saveOrUpdateProduct(@Valid CityForm cityForm, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
-			return "product/productform";
+			return "cities/cityform";
 		}
 
-		City city = cityService.saveOrUpdateCityForm(cityForm);
+		City city = cityFormToCity.convert(cityForm);
+		CityDetails cityDetails = cityService.getCityDetails(city);
 
-		return "redirect:/cities/city/" + city.getId();
+		if (cityDetails.getLat() == null || cityDetails.getLon() == null || cityDetails.getTemperature() == null) {
+			model.addAttribute("error", cityDetails);
+			return "pages/cityform";
+		}
+
+		cityService.saveOrUpdate(city);
+
+		return "redirect:/cities/";
+		// city/" + city.getId();
 	}
 
 	@RequestMapping("/cities/edit")
