@@ -2,7 +2,6 @@ package rs.gecko.assessment.services.reposervices;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -16,28 +15,28 @@ import rs.gecko.assessment.services.MapService;
 import rs.gecko.repositories.MapReposetory;
 
 @Service
-public class MapServiceRepoImpl implements MapService{
+public class MapServiceRepoImpl implements MapService {
 
 	@Autowired
 	private MapReposetory mapRepository;
-	
+
 	private final RestTemplate restTemplate;
 
 	public MapServiceRepoImpl(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
 	}
-	
+
 	@Override
 	public List<?> listAll() {
 
 		List<Maps> maps = new ArrayList<>();
-		mapRepository.findAll().forEach(maps::add);		
+		mapRepository.findAll().forEach(maps::add);
 		return maps;
 	}
 
 	@Override
-	public Optional<Maps> getById(Integer id) {
-		return mapRepository.findById(id);
+	public Maps getById(Integer id) {
+		return mapRepository.findById(id).get();
 	}
 
 	@Override
@@ -48,7 +47,7 @@ public class MapServiceRepoImpl implements MapService{
 	@Override
 	public void delete(Integer id) {
 		mapRepository.deleteById(id);
-		
+
 	}
 
 	@Override

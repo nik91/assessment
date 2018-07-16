@@ -2,7 +2,6 @@ package rs.gecko.assessment.services.reposervices;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,9 +27,9 @@ public class UserServiceRepoImpl implements UserService {
 	}
 
 	@Override
-	public Optional<User> getById(Integer id) {
+	public User getById(Integer id) {
 
-		return userRepository.findById(id);
+		return userRepository.findById(id).get();
 	}
 
 	@Override

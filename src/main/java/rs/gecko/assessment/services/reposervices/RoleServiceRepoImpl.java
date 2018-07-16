@@ -2,7 +2,6 @@ package rs.gecko.assessment.services.reposervices;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +25,8 @@ public class RoleServiceRepoImpl implements RoleService {
 	}
 
 	@Override
-	public Optional<Role> getById(Integer id) {
-		return roleRepository.findById(id);
+	public Role getById(Integer id) {
+		return roleRepository.findById(id).get();
 	}
 
 	@Override

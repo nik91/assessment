@@ -118,22 +118,22 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 
 		City city = new City();
 		city.setName("Belgrede");
-		city.setState("rs");
+		city.setState("");
 		cityService.saveOrUpdate(city);
 
 		City city1 = new City();
 		city1.setName("Novi Sad");
-		city1.setState("rs");
+		city1.setState("RS");
 		cityService.saveOrUpdate(city1);
 
 		City city2 = new City();
 		city2.setName("Gornji Milanovac");
-		city2.setState("rs");
+		city2.setState("RS");
 		cityService.saveOrUpdate(city2);
 
 		City city3 = new City();
 		city3.setName("Beograd");
-		city3.setState("rs");
+		city3.setState("RS");
 		cityService.saveOrUpdate(city3);
 
 	}

@@ -9,11 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import rs.gecko.assessment.commands.CityForm;
 import rs.gecko.assessment.converters.CityFormToCity;
+import rs.gecko.assessment.converters.CityToCityForm;
 import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.domain.CityDetails;
 import rs.gecko.assessment.services.CityService;
@@ -23,7 +25,6 @@ public class CityController {
 
 	@Autowired
 	private CityService cityService;
-
 
 	@Autowired
 	private CityFormToCity cityFormToCity;
@@ -74,8 +75,13 @@ public class CityController {
 		// city/" + city.getId();
 	}
 
-	@RequestMapping("/cities/edit")
-	public String cityForm(Model model) {
+	@RequestMapping("/cities/edit/{id}")
+	public String cityForm(@PathVariable Integer id, Model model) {
+
+		CityToCityForm cityToCityForm = new CityToCityForm();
+		City city = cityService.getById(id);
+
+		model.addAttribute("cityForm", cityToCityForm.convert(city));
 
 		return "pages/cityform";
 	}

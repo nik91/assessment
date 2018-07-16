@@ -2,7 +2,6 @@ package rs.gecko.assessment.services.reposervices;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -35,9 +34,9 @@ public class WeatherServiceRepoImpl implements WeatherService {
 	}
 
 	@Override
-	public Optional<Weather> getById(Integer id) {
+	public Weather getById(Integer id) {
 
-		return weatherRepository.findById(id);
+		return weatherRepository.findById(id).get();
 	}
 
 	@Override

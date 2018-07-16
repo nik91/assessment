@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -44,8 +43,8 @@ public class CityServiceRepoImpl implements CityService {
 	}
 
 	@Override
-	public Optional<City> getById(Integer id) {
-		return cityRepository.findById(id);
+	public City getById(Integer id) {
+		return cityRepository.findById(id).get();
 	}
 
 	@Override
@@ -66,12 +65,12 @@ public class CityServiceRepoImpl implements CityService {
 
 		Location location = mapService.getData(citie);
 		if (location != null) {
-		cityDetail.setLat(round(location.getLat(), 5));
-		cityDetail.setLon(round(location.getLon(), 5));
+			cityDetail.setLat(round(location.getLat(), 5));
+			cityDetail.setLon(round(location.getLon(), 5));
 		}
 		WeatherParam weatherParam = weatherService.getData(citie);
 		if (weatherParam.getMain().getTemp() != null) {
-		cityDetail.setTemperature(round(weatherParam.getMain().getTemp() - 273, 2));
+			cityDetail.setTemperature(round(weatherParam.getMain().getTemp() - 273, 2));
 		}
 		return cityDetail;
 	}
