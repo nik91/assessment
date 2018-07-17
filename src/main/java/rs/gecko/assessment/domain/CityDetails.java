@@ -2,16 +2,23 @@ package rs.gecko.assessment.domain;
 
 public class CityDetails {
 
-	private String city;
+	private City city;
 	private Double temperature;
 	private Double lat;
 	private Double lon;
 
-	public String getCity() {
+	/**
+	 * @return the city
+	 */
+	public City getCity() {
 		return city;
 	}
 
-	public void setCity(String city) {
+	/**
+	 * @param city
+	 *            the city to set
+	 */
+	public void setCity(City city) {
 		this.city = city;
 	}
 

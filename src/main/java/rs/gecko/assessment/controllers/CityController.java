@@ -19,6 +19,8 @@ import rs.gecko.assessment.converters.CityToCityForm;
 import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.domain.CityDetails;
 import rs.gecko.assessment.services.CityService;
+import rs.gecko.assessment.services.MapService;
+import rs.gecko.assessment.services.WeatherService;
 
 @Controller
 public class CityController {
@@ -28,6 +30,12 @@ public class CityController {
 
 	@Autowired
 	private CityFormToCity cityFormToCity;
+
+	@Autowired
+	private MapService mapService;
+
+	@Autowired
+	private WeatherService weatherService;
 
 	@RequestMapping("/cities")
 	public String cities(Model model) {
@@ -44,6 +52,8 @@ public class CityController {
 		});
 
 		model.addAttribute("cityDetails", citiesDetails);
+		model.addAttribute("CityActive", "active");
+		model.addAttribute("configOk", isConfigOk());
 
 		return "pages/cities";
 	}
@@ -51,6 +61,8 @@ public class CityController {
 	@RequestMapping("/cities/new")
 	public String newProduct(Model model) {
 		model.addAttribute("cityForm", new CityForm());
+		model.addAttribute("CityActive", "active");
+		model.addAttribute("viewOption", "New");
 		return "pages/cityform";
 	}
 
@@ -58,7 +70,7 @@ public class CityController {
 	public String saveOrUpdateProduct(@Valid CityForm cityForm, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
-			return "cities/cityform";
+			return "pages/cityform";
 		}
 
 		City city = cityFormToCity.convert(cityForm);
@@ -82,7 +94,26 @@ public class CityController {
 		City city = cityService.getById(id);
 
 		model.addAttribute("cityForm", cityToCityForm.convert(city));
+		model.addAttribute("CityActive", "active");
+		model.addAttribute("viewOption", "Edit");
 
 		return "pages/cityform";
+	}
+
+	@RequestMapping("/cities/delete/{id}")
+	public String deleteCity(@PathVariable Integer id) {
+
+		cityService.delete(id);
+
+		return "redirect:/cities";
+	}
+
+	public boolean isConfigOk() {
+
+		if (mapService.findEnabled(true) == null && weatherService.findEnabled(true) == null) {
+			return false;
+		}
+
+		return true;
 	}
 }

@@ -59,7 +59,7 @@ public class MapServiceRepoImpl implements MapService {
 		if (city != null && mapsApi != null) {
 
 			try {
-				location = this.restTemplate.getForObject(mapsApi.toString(), Location[].class, city.toString());
+				location = this.restTemplate.getForObject(mapsApi.toString(), Location[].class, city.getCityAndState());
 			} catch (Exception e) {
 				return location[0];
 			}

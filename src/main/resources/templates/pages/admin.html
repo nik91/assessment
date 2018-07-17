@@ -21,6 +21,7 @@
 </head>
 <body>
 <div th:replace="fragments/languages"></div>
+<div th:replace="fragments/navigation"></div>
 	<div class="card">
 		<div class="card-header">
 			<h3 class="card-title">Admin panel</h3>
@@ -58,14 +59,10 @@
 											class="fa fa-map-marker"></i></span>
 
 										<div class="info-box-content">
-											<span class="info-box-text"
-												th:text="'City: ' + ${cityDetail.city}"></span> <span
-												class="info-box-number"
-												th:text="'Temperature: ' + ${cityDetail.temperature}"></span>
-											<span class="info-box-text"
-												th:text="'Lantitude: ' + ${cityDetail.lat}"></span> <span
-												class="info-box-text"
-												th:text="'Longitude: ' + ${cityDetail.lon}"></span>
+											<span class="info-box-text" th:text="'City: ' + ${cityDetail.city}"></span>
+											<span class="info-box-number" th:text="${cityDetail.temperature} != null ? 'Temperature: '+${cityDetail.temperature} : 'Temperature: N/A' "></span>
+											<span class="info-box-text" th:text="${cityDetail.lat} != null ? 'Lantitude: ' + ${cityDetail.lat} :'Lantitude: N/A'"></span>
+											<span class="info-box-text" th:text="${cityDetail.lon}  != null ? 'Longitude: ' + ${cityDetail.lon} : 'Longitude: N/A'"></span>
 										</div>
 
 									</div>
@@ -98,16 +95,20 @@
 								<!-- /.info-box-content -->
 							</div>
 							<!-- /.info-box -->
+							<a href="/cities/">
 							<div
 								th:class="${countofcities} < 4 ? (${countofcities} < 1 ? 'info-box mb-3 bg-danger':'info-box mb-3 bg-warning') : 'info-box mb-3 bg-success'">
+								
 								<span class="info-box-icon"><i class="fa fa-map-signs"></i></span>
 
+								
 								<div class="info-box-content">
 									<span class="info-box-text">Cities</span> <span
 										class="info-box-number" th:text=${countofcities}>2</span>
 								</div>
+								
 
-							</div>
+							</div></a>
 
 
 							<div th:if="${activeWetherConfig}"

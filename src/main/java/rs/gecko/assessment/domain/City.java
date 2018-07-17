@@ -54,6 +54,10 @@ public class City implements DomainObject{
 	 */
 	@Override
 	public String toString() {
+		return name;
+	}
+
+	public String getCityAndState() {
 		if (state != null && !state.isEmpty()) {
 			return name + "," + state;
 		}

@@ -55,13 +55,14 @@ public class CityServiceRepoImpl implements CityService {
 	@Override
 	public void delete(Integer id) {
 
+		cityRepository.deleteById(id);
 	}
 
 	@Override
 	public CityDetails getCityDetails(City citie) {
 		CityDetails cityDetail = new CityDetails();
 
-		cityDetail.setCity(citie.getName());
+		cityDetail.setCity(citie);
 
 		Location location = mapService.getData(citie);
 		if (location != null) {

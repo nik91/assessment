@@ -61,7 +61,7 @@ public class WeatherServiceRepoImpl implements WeatherService {
 		if (city != null && WeatherApi != null) {
 			try {
 				watherParam = this.restTemplate.getForObject(WeatherApi.toString(), WeatherParam.class,
-						city.toString());
+						city.getCityAndState());
 				System.out.println(watherParam.getId() + " " + watherParam.getMain().getTemp());
 			} catch (Exception e) {
 				return watherParam;

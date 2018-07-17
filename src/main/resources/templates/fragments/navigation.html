@@ -1,25 +1,14 @@
-<nav class="navbar navbar-default" xmlns:th="http://www.thymeleaf.org">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" th:href="@{/}">
-        Partial template update demo
-      </a>
-    </div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li th:class="${section eq 'cities'} ? 'active'">
-          <a th:href="@{/cities}">Cities <span th:if="${section eq 'cities'}" class="sr-only">(current)</span></a>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li id="ui-toggle" class="hidden"></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom" style="margin-left:0px!important" xmlns:th="http://www.thymeleaf.org">
+    <!-- Left navbar links -->
+    <ul class="navbar-nav">
+      <li th:class="${AdminActive != null} ? 'nav-item d-none d-sm-inline-block active':'nav-item d-none d-sm-inline-block'">
+        <a href="/admin" class="nav-link">Admin</a>
+      </li>
+      <li th:class="${CityActive != null} ? 'nav-item d-none d-sm-inline-block active':'nav-item d-none d-sm-inline-block'">
+        <a href="/cities" class="nav-link">Cities</a>
+      </li>
+      <li th:class="${ConfigActive != null} ? 'nav-item d-none d-sm-inline-block active':'nav-item d-none d-sm-inline-block'">
+        <a href="/configs" class="nav-link">Config</a>
+      </li>
+    </ul>
+  </nav>

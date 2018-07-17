@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Spring Core Online Tutorial - List Users</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<!-- Ionicons -->
+<link rel="stylesheet"
+	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<script src="../../js/jquery/jquery.min.js"></script>
+<link rel="stylesheet" href="../../css/dataTables.bootstrap4.css">
+<!-- Theme style -->
+<link rel="stylesheet" href="../../../css/adminlte.css">
+<!-- Google Font: Source Sans Pro -->
+<link
+	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
+	rel="stylesheet">
+
+</head>
+<body>
+<div th:replace="fragments/languages"></div>
+<div th:replace="fragments/navigation"></div>
+<div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Cities</h3>
+            </div>
+            
+
+	<div class="content-wrapper" style="margin-left: 0px !important">
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1 class="m-0 text-dark">Config List</h1>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<section class="content">
+		<div class="row">
+        <div class="col-12">
+          
+		<div class="card">
+            
+            <div class="card-body">
+            
+              <table id="example1" class="table table-bordered table-striped" th:if="${not #lists.isEmpty(mapConfigs)}">
+                <thead>
+                <tr>
+                  <th>Api url</th>
+                  <th>Api parametars</th>
+                  <th>Enabled</th>
+                  <th>Edit</th>
+            	  <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="mapConfig : ${mapConfigs}" >
+                  <td th:text="${mapConfig.url}"></td>
+                  <td th:text="${mapConfig.parametars}"></td>
+                  <td th:text="${mapConfig.enabled}"></td>
+                  <th><a th:href="${'/configs/Map/edit/' + mapConfig.id}" class="btn btn-success btn-md m-0 text-light" ><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a></th>
+                  <th><a th:href="${'/configs/Map/delete/' + mapConfig.id}" class="btn btn-md btn-danger m-0 text-light" ><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></th>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Api url</th>
+                  <th>Api parametars</th>
+                  <th>Enabled</th>
+                  <th>Edit</th>
+            	  <th>Delete</th>
+                </tr>
+                </tfoot>
+              </table>
+              <a th:href="${'/configs/Map/new'}" class="btn btn-md btn-primary m-0 text-light"><i class="fa fa-map-o" aria-hidden="true"></i> Add new</a>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+					
+					
+					
+					
+					
+		<div class="row">
+        <div class="col-12">
+          
+		<div class="card">
+            
+            <div class="card-body">
+            
+              <table id="example1" class="table table-bordered table-striped" th:if="${not #lists.isEmpty(weatherConfigs)}">
+                <thead>
+                <tr>
+                  <th>Api url</th>
+                  <th>Api parametars</th>
+                  <th>Api key</th>
+                  <th>Enabled</th>
+                  <th>Edit</th>
+            	  <th>Delete</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="weatherConfig : ${weatherConfigs}" >
+                  <td th:text="${weatherConfig.url}"></td>
+                  <td th:text="${weatherConfig.parametars}"></td>
+                  <td th:text="${weatherConfig.apiKey}"></td>
+                  <td th:text="${weatherConfig.enabled}"></td>
+                  <th><a th:href="${'/configs/Weather/edit/' + weatherConfig.id}" class="btn btn-success btn-md m-0 text-light" ><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a></th>
+                  <th><a th:href="${'/configs/Weather/delete/' + weatherConfig.id}" class="btn btn-md btn-danger m-0 text-light" ><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</a></th>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Api url</th>
+                  <th>Api parametars</th>
+                  <th>Api key</th>
+                  <th>Enabled</th>
+                  <th>Edit</th>
+            	  <th>Delete</th>
+                </tr>
+                </tfoot>
+              </table>
+              <a th:href="${'/configs/Weather/new'}" class="btn btn-md btn-primary m-0 text-light"><i class="fa fa-cloud" aria-hidden="true"></i> Add new</a>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+					
+
+		</section>
+	</div>
+
+</div>
+
+	<footer class="main-footer" style="margin-left: 0px !important">
+
+	</footer>
+
+
+</body>
+<script src="../../js/jquery.dataTables.js"></script>
+<script src="../../js/dataTables.bootstrap4.js"></script>
+<script>
+  $(function () {
+    $("#example1").DataTable();
+  });
+</script>
+</html>

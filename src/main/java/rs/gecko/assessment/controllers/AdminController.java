@@ -40,6 +40,7 @@ public class AdminController {
 		Integer noOfConfiguration = noOfConfig();
 		System.out.println(noOfConfiguration);
 
+		model.addAttribute("AdminActive", "active");
 		model.addAttribute("cityDetails", citiesDetails);
 		model.addAttribute("config", mapService.listAll().size() + weatherService.listAll().size());
 		model.addAttribute("mapconfig", mapService.listAll().size());

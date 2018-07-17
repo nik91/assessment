@@ -20,6 +20,7 @@
 	rel="stylesheet">
 </head>
 <body>
+<div th:replace="fragments/languages"></div>
 	<!-- <div class="container">
 		<div th:if="${not #lists.isEmpty(cityDetails)}">
 
@@ -80,9 +81,9 @@
 
 						<div class="info-box-content">
 							<span class="info-box-text" th:text="'City: ' + ${cityDetail.city}"></span>
-							<span class="info-box-number" th:text="'Temperature: ' + ${cityDetail.temperature}"></span>
-							<span class="info-box-text" th:text="'Lantitude: ' + ${cityDetail.lat}"></span>
-							<span class="info-box-text" th:text="'Longitude: ' + ${cityDetail.lon}"></span>
+							<span class="info-box-number" th:text="${cityDetail.temperature} != null ? 'Temperature: '+${cityDetail.temperature} : 'Temperature: N/A' "></span>
+							<span class="info-box-text" th:text="${cityDetail.lat} != null ? 'Lantitude: ' + ${cityDetail.lat} :'Lantitude: N/A'"></span>
+							<span class="info-box-text" th:text="${cityDetail.lon}  != null ? 'Longitude: ' + ${cityDetail.lon} : 'Longitude: N/A'"></span>
 						</div>
 
 					</div>
