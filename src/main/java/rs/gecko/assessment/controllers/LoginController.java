@@ -17,7 +17,7 @@ public class LoginController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		if (!(authentication instanceof AnonymousAuthenticationToken)) {
-			return "redirect:/";
+			return "redirect:/admin";
 		}
 
 

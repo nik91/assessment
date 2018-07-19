@@ -5,11 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import rs.gecko.assessment.domain.DomainObject;
-
 
 @Entity
-public class Api implements DomainObject{
+public abstract class BaseApi {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,6 +15,7 @@ public class Api implements DomainObject{
 	private String url;
 	private String parametars;
 	private boolean enabled;
+
 	public Integer getId() {
 		return id;
 	}

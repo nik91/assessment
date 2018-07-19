@@ -29,7 +29,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().ignoringAntMatchers("/h2-console/**").disable().authorizeRequests().antMatchers("/**/favicon.ico")
 				.permitAll()
 
-				.and().authorizeRequests().antMatchers("/cities/**").permitAll()
 
 				.and().authorizeRequests().antMatchers("/webjars/**").permitAll()
 
@@ -41,7 +40,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 				.and().formLogin().loginPage("/login").permitAll()
 
-				// .and().authorizeRequests().antMatchers("/admin/**").authenticated()
+				.and().authorizeRequests().antMatchers("/admin/**").authenticated()
+
+				.and().authorizeRequests().antMatchers("/configs/**").authenticated()
+
+				.and().authorizeRequests().antMatchers("/cities/**").authenticated()
 
 				// .and().authorizeRequests().antMatchers("/admin/**").hasAnyAuthority("ADMIN")
 

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import rs.gecko.assessment.commands.CityForm;
-import rs.gecko.assessment.converters.CityFormToCity;
-import rs.gecko.assessment.converters.CityToCityForm;
+import rs.gecko.assessment.converters.city.CityFormToCity;
+import rs.gecko.assessment.converters.city.CityToCityForm;
 import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.domain.CityDetails;
 import rs.gecko.assessment.services.CityService;
@@ -59,17 +59,18 @@ public class CityController {
 	}
 
 	@RequestMapping("/cities/new")
-	public String newProduct(Model model) {
+	public String newCity(Model model) {
 		model.addAttribute("cityForm", new CityForm());
 		model.addAttribute("CityActive", "active");
-		model.addAttribute("viewOption", "New");
+		model.addAttribute("viewOption", "cityForm.new");
 		return "pages/cityform";
 	}
 
 	@RequestMapping(value = "/cities", method = RequestMethod.POST)
-	public String saveOrUpdateProduct(@Valid CityForm cityForm, BindingResult bindingResult, Model model) {
+	public String saveOrUpdateCity(@Valid CityForm cityForm, BindingResult bindingResult, Model model) {
 
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("viewOption", "cityForm.new");
 			return "pages/cityform";
 		}
 
@@ -78,6 +79,7 @@ public class CityController {
 
 		if (cityDetails.getLat() == null || cityDetails.getLon() == null || cityDetails.getTemperature() == null) {
 			model.addAttribute("error", cityDetails);
+			model.addAttribute("viewOption", "cityForm.new");
 			return "pages/cityform";
 		}
 
@@ -95,7 +97,7 @@ public class CityController {
 
 		model.addAttribute("cityForm", cityToCityForm.convert(city));
 		model.addAttribute("CityActive", "active");
-		model.addAttribute("viewOption", "Edit");
+		model.addAttribute("viewOption", "cityForm.edit");
 
 		return "pages/cityform";
 	}
@@ -110,7 +112,7 @@ public class CityController {
 
 	public boolean isConfigOk() {
 
-		if (mapService.findEnabled(true) == null && weatherService.findEnabled(true) == null) {
+		if (mapService.findEnabled(true) == null || weatherService.findEnabled(true) == null) {
 			return false;
 		}
 

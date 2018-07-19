@@ -3,10 +3,12 @@ package rs.gecko.assessment.commands;
 
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 
 public class CityForm {
 	@NotEmpty
+	@Size(min = 3, max = 10)
 	private String cityName;
 	private String state;
 	private Integer id;

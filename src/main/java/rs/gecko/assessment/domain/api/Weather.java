@@ -3,7 +3,7 @@ package rs.gecko.assessment.domain.api;
 import javax.persistence.Entity;
 
 @Entity
-public class Weather extends Api{
+public class Weather extends BaseApi{
 
 	
 	private String apiKey;

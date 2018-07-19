@@ -41,7 +41,26 @@ public class MapServiceRepoImpl implements MapService {
 
 	@Override
 	public Maps saveOrUpdate(Maps domainObject) {
+
+		if (domainObject.isEnabled()) {
+			restartEnabled();
+			domainObject.setEnabled(true);
+		}
+
 		return mapRepository.save(domainObject);
+	}
+
+	private void restartEnabled() {
+		List<Maps> maps = (List<Maps>) listAll();
+		maps.forEach(map -> {
+
+			if (map.isEnabled()) {
+				map.setEnabled(false);
+				saveOrUpdate(map);
+			}
+
+		});
+
 	}
 
 	@Override

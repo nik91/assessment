@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import rs.gecko.assessment.commands.CityForm;
-import rs.gecko.assessment.converters.CityFormToCity;
+import rs.gecko.assessment.converters.city.CityFormToCity;
 import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.domain.CityDetails;
 import rs.gecko.assessment.externalservices.maps.Location;

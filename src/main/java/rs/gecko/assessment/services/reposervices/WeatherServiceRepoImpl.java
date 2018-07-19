@@ -42,7 +42,25 @@ public class WeatherServiceRepoImpl implements WeatherService {
 	@Override
 	public Weather saveOrUpdate(Weather domainObject) {
 
+		if (domainObject.isEnabled()) {
+			restartEnabled();
+			domainObject.setEnabled(true);
+		}
+
 		return weatherRepository.save(domainObject);
+	}
+
+	private void restartEnabled() {
+		List<Weather> weathers = (List<Weather>) listAll();
+		weathers.forEach(weather -> {
+
+			if (weather.isEnabled()) {
+				weather.setEnabled(false);
+				saveOrUpdate(weather);
+			}
+
+		});
+
 	}
 
 	@Override

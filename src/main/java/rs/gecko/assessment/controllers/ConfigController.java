@@ -35,6 +35,4 @@ public class ConfigController {
 		return "pages/configs";
 	}
 
-
-
 }

@@ -1,4 +1,4 @@
-package rs.gecko.assessment.converters;
+package rs.gecko.assessment.converters.city;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
