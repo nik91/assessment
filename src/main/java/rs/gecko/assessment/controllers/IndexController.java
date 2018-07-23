@@ -12,21 +12,24 @@ import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.domain.CityDetails;
 import rs.gecko.assessment.services.CityService;
 
+/**
+ * @author Nikola Karovic
+ *
+ *         gecko SOLUTIONS
+ */
 @Controller
 public class IndexController {
 	@Autowired
 	private CityService cityService;
 
 
-	/*
-	 * @RequestMapping("login") public String loginForm(){ return "login"; }
+	/**
+	 * Open index page and show page by data form database
+	 * 
+	 * @param model
+	 *            send list of CityDetails to page for rendering
+	 * @return index.html page
 	 */
-
-	// @RequestMapping("/cities")
-	// public String sities() {
-	// return "pages/cities";
-	// }
-
 	@RequestMapping("/")
 	public String index(Model model) {
 		List<CityDetails> citiesDetails = new ArrayList<CityDetails>();

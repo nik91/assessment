@@ -1,196 +1,142 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>AdminLTE 3 | Advanced form elements</title>
-<!-- Tell the browser to be responsive to screen width -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>AdminLTE 3 | Advanced form elements</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta th:replace="fragments/head">
 
-<!-- Font Awesome -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet"
-	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-
-
-<!-- Theme style -->
-<link rel="stylesheet" href="../../css/adminlte.css">
-
-<link rel="stylesheet" href="../../css/select2.min.css">
-<!-- Google Font: Source Sans Pro -->
-<link
-	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
-	rel="stylesheet">
 </head>
+
 <body class="hold-transition sidebar-mini">
-<div th:replace="fragments/languages"></div>
-<div th:replace="fragments/navigation"></div>
+	<div th:replace="fragments/languages"></div>
+	<div th:replace="fragments/navigation"></div>
 	<div class="wrapper">
 
-
-<div class="card">
-<div class="card-header">
-              <h3 class="card-title">Cities</h3>
-            </div>
-
-
-		<div class="content-wrapper" style="margin-left: 0px !important">
-			<!-- Content Header (Page header) -->
-			<section class="content-header">
-				<div class="container-fluid">
-					<div class="row mb-2">
-						<div class="col-sm-6">
-							<h1>City</h1>
-						</div>
-
-					</div>
-				</div>
-			</section>
-			<section class="content">
-
-
-
-
-
-
-
-
-
-
-
-
-
-				<div class="container-fluid">
-					<!-- SELECT2 EXAMPLE -->
-					<div class="card card-default">
-						<div class="card-header">
-							<h3 class="card-title" th:text="${viewOption}">City</h3>
-							<div class="card-body">
-								<form th:object="${cityForm}" th:action="@{/cities}"
-									method="post">
-									<input type="hidden" th:field="*{id}"/>
-									<div class="row" th:if="${error != null}">
-									<div class="info-box-content">
-									
-										<div class="info-box-content bg-danger col-sm-3">
-										
-											<span class="info-box-text mb-1" th:text="'Temperature: ' + ${error.temperature}"></span>
-											<span class="info-box-text mb-1" th:text="'Lantitude: ' + ${error.lat}"></span>
-											<span class="info-box-text mb-1" th:text="'Longitude: ' + ${error.lon}"></span>
-										</div>
-									</div>
-
-
-									</div>
-									<div th:if="${#fields.hasErrors('*')}" class="row">
-									<div class="info-box-content bg-danger col-sm-3">
-									<span class="info-box-text mb-1" th:text="#{form.hasErrors}"></span>
-												<!-- th:text="'Temperature: ' + ${error.temperature}" -->
-									</div>
-										
-
-										</div>
-									<div class="row">
-
-										<div class="col-md-3">
-											<label>City Name</label>
-											<div class="input-group mb-3">
-												<div class="input-group-prepend">
-													<span class="input-group-text" th:class="${#fields.hasErrors('cityName')} ? 'input-group-text bg-danger' : 'input-group-text'"><i
-														class="fa fa-map-marker"></i></span>
-												</div>
-
-												<input type="text" class="form-control" th:field="*{CityName}"name="CityName"
-													placeholder="City Name">
-													
-											</div>
-											
-											<span class="input-group-text bg-danger" th:each="err : ${#fields.errors('cityName')}" th:text="${err}"></span>
-											<div class="form-group">
-											
-											
-											
-											
-											
-											
-											
-											
-											
-											
-											
-												<label>State</label> <select class="form-control select2"
-													style="width: 100%; height: 34px !important;"
-													id="states-dropdown" name="State" selected="SR"  th:value="${cityForm.state}"
-                            th:utext="${cityForm.state}" th:text="${cityForm.state}">
-
-
-
-
-												</select>
-
-												<div class="col-12" style="padding-top: 40px;">
-													<button type="submit"
-														class="btn btn-primary btn-block btn-flat">Submit</button>
-												</div>
-											</div>
-										</div>
-
-									</div>
-								</form>
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title" th:text="#{cityForm.cities}">Cities</h3>
+			</div>
+			<div class="content-wrapper" style="margin-left: 0px !important; z-index:1;">
+				<!-- Content Header (Page header) -->
+				<section class="content-header">
+					<div class="container-fluid">
+						<div class="row mb-2">
+							<div class="col-sm-6">
+								<h1 th:text="#{cityForm.city}">City</h1>
 							</div>
 
 						</div>
-
-
 					</div>
-				</div>
-			</section>
+				</section>
+				<section class="content">
+
+					<div class="container-fluid">
+						<!-- SELECT2 EXAMPLE -->
+						<div class="card card-default">
+							<div class="card-header">
+								<h3 class="card-title" th:text="#{${viewOption}}">City</h3>
+								<div class="card-body">
+									<form th:object="${cityForm}" th:action="@{/cities}" method="post">
+										<input type="hidden" th:field="*{id}" />
+										<div class="row" th:if="${error != null}">
+											<div class="info-box-content">
+
+												<div class="info-box-content bg-danger col-sm-3">
+
+													<span class="info-box-text mb-1" th:text="${error.temperature} != null ? #{cityForm.temperature}+${error.temperature} : #{cityForm.temperature} +' N/A'"></span>
+													<span class="info-box-text mb-1" th:text="${error.lat} != null ? #{cityForm.lantitude}+' '+${error.lat} : #{cityForm.lantitude} +' N/A'"></span>
+													<span class="info-box-text mb-1" th:text="${error.lon} != null ? #{cityForm.longitude}+' '+${error.lon} : #{cityForm.longitude} +' N/A'"></span>
+												</div>
+											</div>
+
+
+										</div>
+										<div th:if="${#fields.hasErrors('*')}" class="row">
+											<div class="info-box-content bg-danger col-sm-3">
+												<span class="info-box-text mb-1" th:text="#{cityForm.hasErrors}"></span>
+												<!-- th:text="'Temperature: ' + ${error.temperature}" -->
+											</div>
+
+
+										</div>
+										<div class="row">
+
+											<div class="col-md-3">
+												<label th:text="#{cityForm.cityname}">City Name</label>
+												<div class="input-group mb-3">
+													<div class="input-group-prepend">
+														<span class="input-group-text" th:class="${#fields.hasErrors('cityName')} ? 'input-group-text bg-danger' : 'input-group-text'"><i
+														class="fa fa-map-marker"></i></span>
+													</div>
+
+													<input type="text" class="form-control" th:field="*{CityName}" name="CityName" th:name="#{cityForm.cityname}" placeholder="City Name" th:placeholder="#{cityForm.cityname}">
+
+												</div>
+
+												<span class="input-group-text bg-danger" th:each="err : ${#fields.errors('cityName')}" th:text="${err}"></span>
+												<div class="form-group">
+													<label th:text="#{cityForm.state}">State</label>
+													<select class="form-control select2" style="width: 100%; height: 34px !important; z-index:30000;" id="states-dropdown" name="State" selected="SR" th:value="${cityForm.state}" th:utext="${cityForm.state}" th:text="${cityForm.state}">
+													</select>
+
+													<div class="col-12" style="padding-top: 40px;">
+														<button type="submit" class="btn btn-primary btn-block btn-flat" th:text="#{cityForm.submit}">Submit</button>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</form>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</section>
+
+			</div>
+
+			<footer class="main-footer" style="margin-left: 0px !important;  z-index:1;">
+
+			</footer>
+
+			<aside class="control-sidebar control-sidebar-dark"></aside>
 
 		</div>
-
-		<footer class="main-footer" style="margin-left: 0px !important">
-
-		</footer>
-
-
-		<aside class="control-sidebar control-sidebar-dark"></aside>
-
 	</div>
-</div>
-
 
 	<script src="../../js/jquery/jquery.min.js"></script>
 
 	<script src="../../js/select2.full.min.js"></script>
 
-
-
-	
 </body>
 <script>
-		let dropdown = $('#states-dropdown');
+	let dropdown = $('#states-dropdown');
 
-		dropdown.empty();
+	dropdown.empty();
 
-		dropdown
-				.append('<option selected="true" disabled>Choose State</option>');
-		dropdown.prop('selectedIndex', 0);
+	dropdown
+		.append('<option selected="true" disabled>[[#{cityForm.chosestate}]]</option>');
+	dropdown.prop('selectedIndex', 0);
 
-		$.getJSON("../../json/states.json", function(data) {
-			$.each(data, function(key, entry) {
-				dropdown.append($('<option></option>')
-						.attr('value', entry.code).text(entry.name));
-			})
-		});
-
-		$(function() {
-			//Initialize Select2 Elements
-			if("[[${cityForm.state}]]"!==""){
-				dropdown.val("[[${cityForm.state}]]");}
-			$('.select2').select2()
+	$.getJSON("../../json/states.json", function(data) {
+		$.each(data, function(key, entry) {
+			dropdown.append($('<option></option>')
+				.attr('value', entry.code).text(entry.name));
 		})
-		
-	</script>
+	});
+
+	$(function() {
+		//Initialize Select2 Elements
+		if ("[[${cityForm.state}]]" !== "") {
+			dropdown.val("[[${cityForm.state}]]");
+		}
+		$('.select2').select2()
+	})
+</script>
+
 </html>

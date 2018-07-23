@@ -6,14 +6,15 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+/**
+ * @author Nikola Karovic
+ *
+ *         gecko SOLUTIONS
+ * 
+ */
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
-
-
-
-
-
 
 
 	@Override
@@ -40,7 +41,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 				.and().formLogin().loginPage("/login").permitAll()
 
-				.and().authorizeRequests().antMatchers("/admin/**").authenticated()
+				.and().authorizeRequests().antMatchers("/admin/**").permitAll()// authenticated()
 
 				.and().authorizeRequests().antMatchers("/configs/**").authenticated()
 

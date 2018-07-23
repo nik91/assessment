@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,12 @@ import rs.gecko.assessment.services.MapService;
 import rs.gecko.assessment.services.WeatherService;
 import rs.gecko.repositories.CityRepository;
 
+/**
+ * @author Nikola Karovic
+ *
+ *         gecko SOLUTIONS
+ *
+ */
 @Service
 public class CityServiceRepoImpl implements CityService {
 
@@ -34,6 +42,8 @@ public class CityServiceRepoImpl implements CityService {
 
 	@Autowired
 	private CityFormToCity cityFormToCity;
+
+	private final static Logger LOGGER = LoggerFactory.getLogger(WeatherServiceRepoImpl.class);
 
 	@Override
 	public List<?> listAll() {
@@ -58,6 +68,7 @@ public class CityServiceRepoImpl implements CityService {
 		cityRepository.deleteById(id);
 	}
 
+
 	@Override
 	public CityDetails getCityDetails(City citie) {
 		CityDetails cityDetail = new CityDetails();
@@ -76,14 +87,25 @@ public class CityServiceRepoImpl implements CityService {
 		return cityDetail;
 	}
 
+	/**
+	 * Method for convert doubles to doubles with rounding
+	 * 
+	 * @param value
+	 *            input double
+	 * @param places
+	 *            input number of places for rounding
+	 * @return rounded double
+	 */
 	public static double round(double value, int places) {
 		if (places < 0)
 			throw new IllegalArgumentException();
 
 		BigDecimal bd = new BigDecimal(value);
 		bd = bd.setScale(places, RoundingMode.HALF_UP);
+		LOGGER.debug("Rounded nubmer of: " + value + ", to: " + places + " number of places, is: " + bd);
 		return bd.doubleValue();
 	}
+
 
 	@Override
 	public City saveOrUpdateCityForm(@Valid CityForm cityForm) {

@@ -3,6 +3,8 @@ package rs.gecko.assessment.services.reposervices;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -14,11 +16,19 @@ import rs.gecko.assessment.externalservices.weather.WeatherParam;
 import rs.gecko.assessment.services.WeatherService;
 import rs.gecko.repositories.WeatherRepository;
 
+/**
+ * @author Nikola Karovic
+ *
+ *         gecko SOLUTIONS
+ *
+ */
 @Service
 public class WeatherServiceRepoImpl implements WeatherService {
 
 	@Autowired
 	private WeatherRepository weatherRepository;
+
+	private final static Logger LOGGER = LoggerFactory.getLogger(WeatherServiceRepoImpl.class);
 
 	private final RestTemplate restTemplate;
 
@@ -72,21 +82,21 @@ public class WeatherServiceRepoImpl implements WeatherService {
 	@Override
 	public WeatherParam getData(City city) {
 
-		Weather WeatherApi = findEnabled(true);
-		// System.out.println(WeatherApi.toString());
+		Weather WeatherApi = findEnabledTrue();
+		LOGGER.debug(WeatherApi.toString());
 		WeatherParam watherParam = new WeatherParam();
 
 		if (city != null && WeatherApi != null) {
 			try {
 				watherParam = this.restTemplate.getForObject(WeatherApi.toString(), WeatherParam.class,
 						city.getCityAndState());
-				System.out.println(watherParam.getId() + " " + watherParam.getMain().getTemp());
+				LOGGER.debug("Temperature for City: " + city.getName() + " , is: " + watherParam.getMain().getTemp());
 			} catch (Exception e) {
+
+				LOGGER.warn(e.toString());
 				return watherParam;
 			}
 
-			// System.out.println(watherParam.getId() + " " +
-			// watherParam.getMain().getTemp());
 
 		}
 
@@ -94,8 +104,8 @@ public class WeatherServiceRepoImpl implements WeatherService {
 	}
 
 	@Override
-	public Weather findEnabled(boolean enabled) {
-		return weatherRepository.findByEnabled(enabled);
+	public Weather findEnabledTrue() {
+		return weatherRepository.findByEnabledTrue();
 	}
 
 }

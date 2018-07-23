@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>GECKO training | Log in</title>
-<!-- Tell the browser to be responsive to screen width -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- Font Awesome -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<!-- Ionicons -->
-<link rel="stylesheet"
-	href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-<!-- Theme style -->
-<link rel="stylesheet" href="../static/css/adminlte.css" th:href="@{../../css/adminlte.css}">
-<!-- iCheck -->
-<link rel="stylesheet" href="../static/js/iCheck/square/blue.css" th:href="@{../../js/iCheck/square/blue.css}">
-<!-- Google Font: Source Sans Pro -->
-<link
-	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700"
-	rel="stylesheet">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>GECKO training | Log in</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="../static/css/adminlte.css" th:href="@{../../css/adminlte.css}">
+	<!-- iCheck -->
+	<link rel="stylesheet" href="../static/js/iCheck/square/blue.css" th:href="@{../../js/iCheck/square/blue.css}">
+	<!-- Google Font: Source Sans Pro -->
+	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+
 <body class="hold-transition login-page">
 
-<div th:replace="fragments/languages"></div>
+	<div th:replace="fragments/languages"></div>
 
 
 	<div class="login-box">
@@ -38,7 +36,7 @@
 			<div class="card-body login-card-body">
 				<p class="login-box-msg" th:text="#{login.singin}">Sign in to start your session</p>
 
-				<form  th:object="${loginForm}" th:action="@{/login}" method="post">
+				<form th:object="${loginForm}" th:action="@{/login}" method="post">
 					<div th:if="${param.error}" class="alert alert-danger">
 						<span th:text="#{login.error.invalidUsernameOrPassword}">Invalid username and password.</span>
 					</div>
@@ -48,16 +46,14 @@
 					</div>
 
 					<div class="form-group has-feedback">
-					
+
 						<input type="text" class="form-control" placeholder="Username" id="username" name="username" th:placeholder="#{login.username}">
-						
+
 						<span class="fa fa-envelope form-control-feedback"></span>
-						
+
 					</div>
 					<div class="form-group has-feedback">
-						<input type="password" class="form-control" placeholder="password"
-							name="password" id="password" th:placeholder="#{login.password}"> <span
-							class="fa fa-lock form-control-feedback"></span>
+						<input type="password" class="form-control" placeholder="password" name="password" id="password" th:placeholder="#{login.password}"> <span class="fa fa-lock form-control-feedback"></span>
 					</div>
 					<div class="row">
 						<div class="col-12">
@@ -80,4 +76,5 @@
 	<!-- iCheck -->
 	<script src="../static/js/iCheck/icheck.min.js" th:src="@{../../js/iCheck/icheck.min.js}"></script>
 </body>
+
 </html>

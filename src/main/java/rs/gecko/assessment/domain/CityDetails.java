@@ -1,10 +1,27 @@
 package rs.gecko.assessment.domain;
 
+/**
+ * @author Nikola Karovic
+ *
+ *         gecko SOLUTIONS
+ * 
+ *         Collection of City information (Object City and information about
+ *         City: Temperature, Latitude, Longitude)
+ */
 public class CityDetails {
 
 	private City city;
+	/**
+	 * Temperature get form Weather API
+	 */
 	private Double temperature;
+	/**
+	 * Latitude get form Map API
+	 */
 	private Double lat;
+	/**
+	 * Longitude get form Map API
+	 */
 	private Double lon;
 
 	/**

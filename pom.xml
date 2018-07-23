@@ -90,19 +90,16 @@
 
 
 
-		<!--encryption lib -->
-		<dependency>
-			<groupId>org.jasypt</groupId>
-			<artifactId>jasypt</artifactId>
-			<version>1.9.2</version>
-		</dependency>
 
-		<dependency>
-			<groupId>org.jasypt</groupId>
-			<artifactId>jasypt-springsecurity3</artifactId>
-			<version>1.9.2</version>
-		</dependency>
 
+
+		<!-- Thymeleaf SpringSecurity -->
+		<dependency>
+		    <groupId>org.thymeleaf.extras</groupId>
+		    <artifactId>thymeleaf-extras-springsecurity4</artifactId>
+	
+		</dependency>
+		<!-- Thymeleaf SpringSecurity -->
 
 
 
@@ -139,6 +136,12 @@
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 			<scope>runtime</scope>
+		</dependency>
+		<!-- SpringSecurity test -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-test</artifactId>
+		    <scope>test</scope>
 		</dependency>
 
 	</dependencies>

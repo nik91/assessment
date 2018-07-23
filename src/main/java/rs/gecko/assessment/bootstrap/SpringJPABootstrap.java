@@ -12,6 +12,14 @@ import rs.gecko.assessment.services.CityService;
 import rs.gecko.assessment.services.MapService;
 import rs.gecko.assessment.services.WeatherService;
 
+
+/**
+ * @author Nikola Karovic
+ *
+ *         gecko SOLUTIONS
+ * 
+ *         Class for populate database by start data.
+ */
 @Component
 public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -24,6 +32,7 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 	@Autowired
 	private WeatherService weatherService;
 
+
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		loadCities();
@@ -31,6 +40,9 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 	}
 
 
+	/**
+	 * Populate Configuration for Maps and Weather APIs
+	 */
 	private void loadConfig() {
 		Maps map = new Maps();
 		map.setEnabled(true);
@@ -66,6 +78,9 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 
 	}
 
+	/**
+	 * Populate Cities to database
+	 */
 	private void loadCities() {
 
 		City city = new City();

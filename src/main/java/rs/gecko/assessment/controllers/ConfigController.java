@@ -12,6 +12,13 @@ import rs.gecko.assessment.domain.api.Weather;
 import rs.gecko.assessment.services.MapService;
 import rs.gecko.assessment.services.WeatherService;
 
+/**
+ * @author Nikola Karovic
+ *
+ *         gecko SOLUTIONS
+ * 
+ *         Controller for API Configurations
+ */
 @Controller
 public class ConfigController {
 
@@ -21,6 +28,13 @@ public class ConfigController {
 	@Autowired
 	WeatherService weatherService;
 
+	/**
+	 * Open and populate lists of API configurations for Map and Weather
+	 * 
+	 * @param model
+	 *            send list of Maps and Weather configurations
+	 * @return Configs page with list of API configurations
+	 */
 	@RequestMapping("/configs")
 	public String configPage(Model model) {
 
@@ -30,7 +44,7 @@ public class ConfigController {
 
 		model.addAttribute("mapConfigs", maps);
 		model.addAttribute("weatherConfigs", weathers);
-		model.addAttribute("ConfigActive", "active");
+
 
 		return "pages/configs";
 	}

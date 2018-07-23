@@ -1,2 +1,8 @@
-<div class="row justify-content-end"><div class="col-1"><a href="?lang=sr">Serbian</a> | <a href="?lang=en">English</a></div>
+<div class="row justify-content-end" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+	<div class="col-2 mt-1">
+		<a href="?lang=sr" th:text="#{languages.serbian}">Serbian</a> | <a href="?lang=en" th:text="#{languages.english}">English</a> 
+	<a th:href="@{/logout}" class="btn btn-md btn-primary ml-2 text-light" sec:authorize="hasRole('ROLE_ADMIN')"><i class='fa fa-sign-out'></i><span th:text="#{languages.logout}" ></span></a>
+	
+	</div>
+	
 </div>

@@ -3,6 +3,8 @@ package rs.gecko.assessment.services.reposervices;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,12 @@ import rs.gecko.assessment.externalservices.maps.Location;
 import rs.gecko.assessment.services.MapService;
 import rs.gecko.repositories.MapReposetory;
 
+/**
+ * @author Nikola Karovic
+ *
+ *         gecko SOLUTIONS
+ *
+ */
 @Service
 public class MapServiceRepoImpl implements MapService {
 
@@ -21,6 +29,8 @@ public class MapServiceRepoImpl implements MapService {
 	private MapReposetory mapRepository;
 
 	private final RestTemplate restTemplate;
+
+	private final static Logger LOGGER = LoggerFactory.getLogger(WeatherServiceRepoImpl.class);
 
 	public MapServiceRepoImpl(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
@@ -71,8 +81,9 @@ public class MapServiceRepoImpl implements MapService {
 
 	@Override
 	public Location getData(City city) {
-		Maps mapsApi = findEnabled(true);
-		// System.out.println(mapsApi.toString());
+		Maps mapsApi = findEnabledTrue();
+
+		LOGGER.debug(mapsApi.toString());
 		Location[] location = new Location[1];
 
 		if (city != null && mapsApi != null) {
@@ -80,6 +91,8 @@ public class MapServiceRepoImpl implements MapService {
 			try {
 				location = this.restTemplate.getForObject(mapsApi.toString(), Location[].class, city.getCityAndState());
 			} catch (Exception e) {
+
+				LOGGER.warn(e.toString());
 				return location[0];
 			}
 
@@ -88,12 +101,14 @@ public class MapServiceRepoImpl implements MapService {
 		if (location.length < 1) {
 			return null;
 		}
+		LOGGER.debug(
+				"Location for city: " + city.getName() + " is: " + location[0].getLat() + "; " + location[0].getLon());
 		return location[0];
 	}
 
 	@Override
-	public Maps findEnabled(boolean enabled) {
-		return mapRepository.findByEnabled(enabled);
+	public Maps findEnabledTrue() {
+		return mapRepository.findByEnabledTrue();
 	}
 
 }

@@ -6,6 +6,13 @@ import org.springframework.stereotype.Component;
 import rs.gecko.assessment.commands.CityForm;
 import rs.gecko.assessment.domain.City;
 
+/**
+ * @author Nikola Karovic
+ *
+ *         gecko SOLUTIONS
+ * 
+ *         Convert City Form to City
+ */
 @Component
 public class CityFormToCity implements Converter<CityForm, City> {
 

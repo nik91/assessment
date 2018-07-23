@@ -5,7 +5,13 @@ package rs.gecko.assessment.commands;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-
+/**
+ * @author Nikola Karovic
+ *
+ *         gecko SOLUTIONS
+ * 
+ *         Command class for City Form
+ */
 public class CityForm {
 	@NotEmpty
 	@Size(min = 3, max = 10)

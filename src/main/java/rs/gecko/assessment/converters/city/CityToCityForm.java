@@ -6,6 +6,13 @@ import org.springframework.test.annotation.Commit;
 import rs.gecko.assessment.commands.CityForm;
 import rs.gecko.assessment.domain.City;
 
+/**
+ * @author Nikola Karovic
+ *
+ *         gecko SOLUTIONS
+ * 
+ *         Convert City to City Form
+ */
 @Commit
 public class CityToCityForm implements Converter<City, CityForm> {
 

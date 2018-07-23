@@ -9,9 +9,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+/**
+ * @author Nikola Karovic
+ *
+ *         gecko SOLUTIONS
+ */
 @Configuration
 public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 
+
+	/**
+	 * @return default localization for application
+	 */
 	@Bean
 	public SessionLocaleResolver localeResolver() {
 		SessionLocaleResolver sessionLocaleResolver = new SessionLocaleResolver();
@@ -19,6 +28,9 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 		return sessionLocaleResolver;
 	}
 
+	/**
+	 * @return User defined localization
+	 */
 	@Bean
 	LocaleChangeInterceptor localeChangeInterceptor() {
 
@@ -26,6 +38,7 @@ public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 		localeChangeInterceptor.setParamName("lang");
 		return localeChangeInterceptor;
 	}
+
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {

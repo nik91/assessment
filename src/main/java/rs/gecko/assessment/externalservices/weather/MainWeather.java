@@ -2,6 +2,12 @@ package rs.gecko.assessment.externalservices.weather;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+/**
+ * @author Nikola Karovic
+ *
+ *         gecko SOLUTIONS
+ *
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class MainWeather {
 
