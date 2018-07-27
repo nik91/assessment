@@ -20,7 +20,7 @@ public class ApiForm {
 	@URL
 	private String url;
 	@NotEmpty
-	@Size(min = 4, max = 20)
+	@Size(min = 4, max = 50)
 	private String parametars;
 	private boolean enabled;
 	@NotEmpty

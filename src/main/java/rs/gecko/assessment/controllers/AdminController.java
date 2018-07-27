@@ -6,6 +6,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import rs.gecko.assessment.services.reposervices.WeatherServiceRepoImpl;
  *
  *         gecko SOLUTIONS
  */
+@Secured("ROLE_ADMIN")
 @Controller
 public class AdminController {
 
@@ -43,6 +45,8 @@ public class AdminController {
 	 *            weather APIs
 	 * @return admin page
 	 */
+
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/admin")
 	public String adminPage(Model model) {
 
@@ -61,7 +65,7 @@ public class AdminController {
 
 		model.addAttribute("AdminActive", "active");
 		model.addAttribute("cityDetails", citiesDetails);
-		model.addAttribute("config", mapService.listAll().size() + weatherService.listAll().size());
+		model.addAttribute("config", noOfConfiguration);
 		model.addAttribute("mapconfig", mapService.listAll().size());
 		model.addAttribute("weatherconfig", weatherService.listAll().size());
 		model.addAttribute("countofcities", cities.size());

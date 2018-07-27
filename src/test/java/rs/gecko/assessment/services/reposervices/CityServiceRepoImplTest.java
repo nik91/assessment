@@ -1,4 +1,4 @@
-package rs.gecko.assessment.services;
+package rs.gecko.assessment.services.reposervices;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import rs.gecko.assessment.AssessmentApplication;
 import rs.gecko.assessment.domain.City;
+import rs.gecko.assessment.services.CityService;
 
 @RunWith(SpringRunner.class)
 @Import(AssessmentApplication.class)

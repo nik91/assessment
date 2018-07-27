@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,8 @@ import rs.gecko.assessment.services.reposervices.WeatherServiceRepoImpl;
  *
  *         gecko SOLUTIONS
  */
+
+@Secured("ROLE_ADMIN")
 @Controller
 public class CityController {
 
@@ -122,7 +125,9 @@ public class CityController {
 		}
 
 		cityService.saveOrUpdate(city);
-		LOGGER.info("Saved or Updated city: " + city.getName());
+		if (city != null) { // Added to satisfy test needs. Logger was throwing error.
+		LOGGER.info("Saved or Updated city: " + city.toString());
+		}
 
 		return "redirect:/cities/";
 		// city/" + city.getId();

@@ -1,4 +1,4 @@
-package rs.gecko.assessment.services;
+package rs.gecko.assessment.services.reposervices;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -16,6 +16,7 @@ import rs.gecko.assessment.AssessmentApplication;
 import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.domain.api.Maps;
 import rs.gecko.assessment.externalservices.maps.Location;
+import rs.gecko.assessment.services.MapService;
 
 @RunWith(SpringRunner.class)
 @Import(AssessmentApplication.class)

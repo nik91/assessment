@@ -12,38 +12,29 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.context.annotation.Import;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import rs.gecko.assessment.AssessmentApplication;
 import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.services.CityService;
 
-@RunWith(SpringRunner.class)
-@Import(AssessmentApplication.class)
+
 public class IndexControllerTest {
 
-	@Mock // Mockito Mock object
+	@Mock
 	private CityService cityService;
 
-	@InjectMocks // setups up controller, and injects mock objects into it.
+	@InjectMocks
 	private IndexController indexController;
 
 	private MockMvc mockMvc;
 
 	@Before
 	public void setup() {
-		MockitoAnnotations.initMocks(this); // initilizes controller and mocks
-
-		// productController.setProductFormToProduct(new ProductFormToProduct());
-		// productController.setProductToProductForm(new ProductToProductForm());
-
+		MockitoAnnotations.initMocks(this);
 		mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
 	}
 
@@ -58,29 +49,10 @@ public class IndexControllerTest {
 		city1.setName("Gornji Milanovac,RS");
 		cities.add(city1);
 
-		// specific Mockito interaction, tell stub to return list of Cities
-		when(cityService.listAll()).thenReturn((List) cities); // need to strip
-		// generics to keep Mockito happy.
+		when(cityService.listAll()).thenReturn((List) cities);
 
 		mockMvc.perform(get("/")).andExpect(status().isOk()).andExpect(view().name("pages/index"))
 				.andExpect(model().attribute("cityDetails", hasSize(2)));
 	}
-
-	// @Test
-	// public void testList() throws Exception{
-	//
-	// List<Product> products = new ArrayList<>();
-	// products.add(new Product());
-	// products.add(new Product());
-	//
-	// //specific Mockito interaction, tell stub to return list of products
-	// when(productService.listAll()).thenReturn((List) products); //need to strip
-	// generics to keep Mockito happy.
-	//
-	// mockMvc.perform(get("/product/list"))
-	// .andExpect(status().isOk())
-	// .andExpect(view().name("product/list"))
-	// .andExpect(model().attribute("products", hasSize(2)));
-	// }
 
 }

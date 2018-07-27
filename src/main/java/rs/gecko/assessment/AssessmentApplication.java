@@ -3,6 +3,7 @@ package rs.gecko.assessment;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 
 /**
  * @author nikolak
@@ -17,6 +18,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableJpaRepositories("rs.gecko.repositories")
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class AssessmentApplication {
 
 	public static void main(String[] args) {
