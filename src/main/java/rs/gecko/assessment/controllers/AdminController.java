@@ -16,7 +16,6 @@ import rs.gecko.assessment.domain.CityDetails;
 import rs.gecko.assessment.services.CityService;
 import rs.gecko.assessment.services.MapService;
 import rs.gecko.assessment.services.WeatherService;
-import rs.gecko.assessment.services.reposervices.WeatherServiceRepoImpl;
 
 /**
  * @author Nikola Karovic
@@ -34,7 +33,10 @@ public class AdminController {
 	@Autowired
 	private WeatherService weatherService;
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(WeatherServiceRepoImpl.class);
+	@Autowired
+	private LogAcitveConfigsController logActiveConfigsController;
+
+	private final static Logger LOGGER = LoggerFactory.getLogger(AdminController.class);
 
 	/**
 	 * Show list of cities and view of all configurations and number of cities
@@ -61,9 +63,10 @@ public class AdminController {
 
 		});
 		Integer noOfConfiguration = noOfConfig();
-		LOGGER.info(noOfConfiguration.toString());
+		LOGGER.info("Number of configurations:" + noOfConfiguration.toString());
 
 		model.addAttribute("AdminActive", "active");
+		model.addAttribute("logHistory", logActiveConfigsController.getLogActiveConfigs());
 		model.addAttribute("cityDetails", citiesDetails);
 		model.addAttribute("config", noOfConfiguration);
 		model.addAttribute("mapconfig", mapService.listAll().size());

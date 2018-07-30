@@ -128,6 +128,14 @@
 
 				</div>
 			</section>
+			
+			<div class="row" th:if="${not #lists.isEmpty(logHistory)}">
+				<div class="col-12 col-sm-6 col-md-3" th:each="logh : ${logHistory}">
+					<b th:text="${logh.configId}"></b>
+					<b th:text="${logh.lastUsed}"></b>
+				</div>
+			</div>
+			
 		</div>
 
 	</div>

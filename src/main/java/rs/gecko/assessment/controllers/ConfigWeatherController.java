@@ -21,7 +21,6 @@ import rs.gecko.assessment.converters.weather.ApiFormToWeatherConfig;
 import rs.gecko.assessment.converters.weather.WeatherConfigToApiForm;
 import rs.gecko.assessment.domain.api.Weather;
 import rs.gecko.assessment.services.WeatherService;
-import rs.gecko.assessment.services.reposervices.WeatherServiceRepoImpl;
 
 /**
  * @author Nikola Karovic
@@ -36,7 +35,7 @@ public class ConfigWeatherController {
 	@Autowired
 	WeatherService weatherService;
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(WeatherServiceRepoImpl.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(ConfigWeatherController.class);
 
 	private ApiFormToWeatherConfig apiFormToWeatherConfig = new ApiFormToWeatherConfig();
 	private WeatherConfigToApiForm weatherConfigToApiForm = new WeatherConfigToApiForm();

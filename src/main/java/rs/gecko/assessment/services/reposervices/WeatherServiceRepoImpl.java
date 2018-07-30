@@ -1,6 +1,7 @@
 package rs.gecko.assessment.services.reposervices;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,7 +11,9 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import rs.gecko.assessment.controllers.LogAcitveConfigsController;
 import rs.gecko.assessment.domain.City;
+import rs.gecko.assessment.domain.LogActiveConfigs;
 import rs.gecko.assessment.domain.api.Weather;
 import rs.gecko.assessment.externalservices.weather.WeatherParam;
 import rs.gecko.assessment.services.WeatherService;
@@ -29,6 +32,9 @@ public class WeatherServiceRepoImpl implements WeatherService {
 	private WeatherRepository weatherRepository;
 
 	private final static Logger LOGGER = LoggerFactory.getLogger(WeatherServiceRepoImpl.class);
+
+	@Autowired
+	private LogAcitveConfigsController logActiveConfigsController;
 
 	private final RestTemplate restTemplate;
 
@@ -55,9 +61,15 @@ public class WeatherServiceRepoImpl implements WeatherService {
 		if (domainObject.isEnabled()) {
 			restartEnabled();
 			domainObject.setEnabled(true);
+
 		}
 
-		return weatherRepository.save(domainObject);
+		Weather weather = weatherRepository.save(domainObject);
+		if (weather.isEnabled()) {
+			logActiveConfigsController.addLog(new LogActiveConfigs(weather.getId(), new Date()));
+		}
+
+		return weather;
 	}
 
 	private void restartEnabled() {
@@ -83,7 +95,7 @@ public class WeatherServiceRepoImpl implements WeatherService {
 	public WeatherParam getData(City city) {
 
 		Weather WeatherApi = findEnabledTrue();
-		LOGGER.debug(WeatherApi.toString());
+		LOGGER.debug("Weather Api: {}", WeatherApi == null ? WeatherApi : WeatherApi.toString());
 		WeatherParam watherParam = new WeatherParam();
 
 		if (city != null && WeatherApi != null) {
@@ -93,10 +105,10 @@ public class WeatherServiceRepoImpl implements WeatherService {
 				LOGGER.debug("Temperature for City: " + city.getName() + " , is: " + watherParam.getMain().getTemp());
 			} catch (Exception e) {
 
-				LOGGER.warn(e.toString());
+				LOGGER.warn(
+						e.toString() + "----- There is no Api Config or City Name is not found on Api Server. -----");
 				return watherParam;
 			}
-
 
 		}
 

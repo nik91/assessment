@@ -21,7 +21,6 @@ import rs.gecko.assessment.converters.maps.ApiFormToMapConfig;
 import rs.gecko.assessment.converters.maps.MapConfigToApiForm;
 import rs.gecko.assessment.domain.api.Maps;
 import rs.gecko.assessment.services.MapService;
-import rs.gecko.assessment.services.reposervices.WeatherServiceRepoImpl;
 
 /**
  * @author Nikola Karovic
@@ -36,7 +35,7 @@ public class ConfigMapController {
 	@Autowired
 	MapService mapService;
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(WeatherServiceRepoImpl.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(ConfigMapController.class);
 
 	private MapConfigToApiForm mapConfigToApiForm = new MapConfigToApiForm();
 	private ApiFormToMapConfig apiFormToMapConfig = new ApiFormToMapConfig();
@@ -66,11 +65,8 @@ public class ConfigMapController {
 	@RequestMapping("/new")
 	public String newMapConfig(Model model) {
 		model.addAttribute("apiForm", new ApiForm());
-		model.addAttribute("ConfigActive", "active");
 		model.addAttribute("viewOption", "apiForm.viewOption.new");
-		model.addAttribute("formType", "Map");
-		model.addAttribute("formAction", "/configs/Map/update");
-		model.addAttribute("formTitle", "apiForm.maps");
+		populateModelForEditForm(model);
 		return "pages/apiform";
 	}
 
@@ -95,6 +91,7 @@ public class ConfigMapController {
 
 				if (error.getField().equals("parametars") || error.getField().equals("url")) {
 					populateModelForEditForm(model);
+					model.addAttribute("viewOption", "apiForm.viewOption.edit");
 
 					return "pages/apiform";
 				} else {
@@ -103,6 +100,7 @@ public class ConfigMapController {
 			}
 
 			populateModelForEditForm(model);
+			model.addAttribute("viewOption", "apiForm.viewOption.edit");
 
 			if (!validationOk) {
 				return "pages/apiform";
@@ -135,6 +133,7 @@ public class ConfigMapController {
 		ApiForm apiForm = mapConfigToApiForm.convert(map);
 		model.addAttribute("apiForm", apiForm);
 		populateModelForEditForm(model);
+		model.addAttribute("viewOption", "apiForm.viewOption.edit");
 
 		return "pages/apiform";
 	}
@@ -148,7 +147,6 @@ public class ConfigMapController {
 	 */
 	private void populateModelForEditForm(Model model) {
 		model.addAttribute("ConfigActive", "active");
-		model.addAttribute("viewOption", "apiForm.viewOption.edit");
 		model.addAttribute("formType", "Map");
 		model.addAttribute("formAction", "/configs/Map/update");
 		model.addAttribute("formTitle", "apiForm.maps");

@@ -1,6 +1,7 @@
 package rs.gecko.assessment.services.reposervices;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -10,7 +11,9 @@ import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import rs.gecko.assessment.controllers.LogAcitveConfigsController;
 import rs.gecko.assessment.domain.City;
+import rs.gecko.assessment.domain.LogActiveConfigs;
 import rs.gecko.assessment.domain.api.Maps;
 import rs.gecko.assessment.externalservices.maps.Location;
 import rs.gecko.assessment.services.MapService;
@@ -30,7 +33,10 @@ public class MapServiceRepoImpl implements MapService {
 
 	private final RestTemplate restTemplate;
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(WeatherServiceRepoImpl.class);
+	@Autowired
+	private LogAcitveConfigsController logActiveConfigsController;
+
+	private final static Logger LOGGER = LoggerFactory.getLogger(MapServiceRepoImpl.class);
 
 	public MapServiceRepoImpl(RestTemplateBuilder restTemplateBuilder) {
 		this.restTemplate = restTemplateBuilder.build();
@@ -55,9 +61,16 @@ public class MapServiceRepoImpl implements MapService {
 		if (domainObject.isEnabled()) {
 			restartEnabled();
 			domainObject.setEnabled(true);
+
 		}
 
-		return mapRepository.save(domainObject);
+		Maps map = mapRepository.save(domainObject);
+
+		if (map.isEnabled()) {
+			logActiveConfigsController.addLog(new LogActiveConfigs(map.getId(), new Date()));
+		}
+
+		return map;
 	}
 
 	private void restartEnabled() {
@@ -83,7 +96,7 @@ public class MapServiceRepoImpl implements MapService {
 	public Location getData(City city) {
 		Maps mapsApi = findEnabledTrue();
 
-		LOGGER.debug(mapsApi.toString());
+		LOGGER.debug("Map Api: {}", mapsApi == null ? mapsApi : mapsApi.toString());
 		Location[] location = new Location[1];
 
 		if (city != null && mapsApi != null) {
@@ -101,8 +114,12 @@ public class MapServiceRepoImpl implements MapService {
 		if (location.length < 1) {
 			return null;
 		}
-		LOGGER.debug(
-				"Location for city: " + city.getName() + " is: " + location[0].getLat() + "; " + location[0].getLon());
+		if (location[0]!=null) {
+			 LOGGER.debug(
+					"Location for city: " + city.getName() + " is: " + location[0].getLat() + " "
+							+ location[0].getLon());
+		}
+		
 		return location[0];
 	}
 

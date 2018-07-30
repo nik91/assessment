@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import rs.gecko.assessment.controllers.LogAcitveConfigsController;
 import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.domain.api.Maps;
 import rs.gecko.assessment.domain.api.Weather;
@@ -37,6 +38,7 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		loadCities();
 		loadConfig();
+		LogAcitveConfigsController logActiveConfigsController = new LogAcitveConfigsController();
 	}
 
 

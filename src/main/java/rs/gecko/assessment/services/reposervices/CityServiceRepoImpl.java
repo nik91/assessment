@@ -43,7 +43,7 @@ public class CityServiceRepoImpl implements CityService {
 	@Autowired
 	private CityFormToCity cityFormToCity;
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(WeatherServiceRepoImpl.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(CityServiceRepoImpl.class);
 
 	@Override
 	public List<?> listAll() {

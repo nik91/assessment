@@ -24,7 +24,6 @@ import rs.gecko.assessment.domain.CityDetails;
 import rs.gecko.assessment.services.CityService;
 import rs.gecko.assessment.services.MapService;
 import rs.gecko.assessment.services.WeatherService;
-import rs.gecko.assessment.services.reposervices.WeatherServiceRepoImpl;
 
 /**
  * @author Nikola Karovic
@@ -48,7 +47,7 @@ public class CityController {
 	@Autowired
 	private WeatherService weatherService;
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(WeatherServiceRepoImpl.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(CityController.class);
 
 	/**
 	 * Open Cities page and show list of cities
@@ -130,7 +129,6 @@ public class CityController {
 		}
 
 		return "redirect:/cities/";
-		// city/" + city.getId();
 	}
 
 	/**
