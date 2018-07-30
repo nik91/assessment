@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<title>Spring Core Online Tutorial - List Users</title>
+	<title>GECKO training | Admin</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta th:replace="fragments/head">
 </head>
@@ -26,7 +26,7 @@
 
 					</div>
 				</div>
-			</div>{}
+			</div>
 
 			<section class="content">
 				<div class="container-fluid">
@@ -162,7 +162,7 @@
 									<td th:text="${logh.url}">-</td>
 									<td th:text="${logh.parametars}">-</td>
 									<td th:text="${logh.apiKey}">-</td>
-									<td th:text="${logh.lastUsed}">-</td>
+									<td th:text="${#dates.format(logh.lastUsed, 'dd.MM.yyyy HH:mm')}">-</td>
 								</tr>
 							</tbody>
 							<tfoot>

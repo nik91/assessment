@@ -1,6 +1,7 @@
 package rs.gecko.assessment.controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.domain.CityDetails;
+import rs.gecko.assessment.domain.LogActiveConfigs;
 import rs.gecko.assessment.services.CityService;
 import rs.gecko.assessment.services.MapService;
 import rs.gecko.assessment.services.WeatherService;
@@ -65,8 +67,12 @@ public class AdminController {
 		Integer noOfConfiguration = noOfConfig();
 		LOGGER.info("Number of configurations:" + noOfConfiguration.toString());
 
+		List<LogActiveConfigs> logActiveConfigs = new ArrayList<>();
+		logActiveConfigs.addAll(logActiveConfigsController.getLogActiveConfigs());
+		Collections.reverse(logActiveConfigs);
+		
 		model.addAttribute("AdminActive", "active");
-		model.addAttribute("logHistory", logActiveConfigsController.getLogActiveConfigs());
+		model.addAttribute("logHistory", logActiveConfigs);
 		model.addAttribute("cityDetails", citiesDetails);
 		model.addAttribute("config", noOfConfiguration);
 		model.addAttribute("mapconfig", mapService.listAll().size());

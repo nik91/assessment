@@ -90,16 +90,30 @@
 
 
 
+		<!-- Thymeleaf -->
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf</artifactId>
+		</dependency>
+		
+	
+		<!-- Thymeleaf -->
 
 
 
 		<!-- Thymeleaf SpringSecurity -->
 		<dependency>
-		    <groupId>org.thymeleaf.extras</groupId>
-		    <artifactId>thymeleaf-extras-springsecurity4</artifactId>
-	
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 		</dependency>
 		<!-- Thymeleaf SpringSecurity -->
+
+		<!-- Thymeleaf Java8Time -->
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-java8time</artifactId>
+		</dependency>
+		<!-- Thymeleaf Java8Time -->
 
 
 
@@ -130,7 +144,7 @@
 			<!-- <scope>test</scope> -->
 		</dependency>
 
-		<!-- Live reload-->
+		<!-- Live reload -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -139,9 +153,9 @@
 		</dependency>
 		<!-- SpringSecurity test -->
 		<dependency>
-		    <groupId>org.springframework.security</groupId>
-		    <artifactId>spring-security-test</artifactId>
-		    <scope>test</scope>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>

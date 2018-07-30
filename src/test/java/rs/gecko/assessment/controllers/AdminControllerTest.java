@@ -43,6 +43,9 @@ public class AdminControllerTest {
 	@InjectMocks
 	private AdminController adminController;
 
+	@Mock
+	private LogAcitveConfigsController logActiveConfigsController;
+
 
 
 	private MockMvc mockMvc;
@@ -75,6 +78,8 @@ public class AdminControllerTest {
 		map.setEnabled(true);
 		List<Maps> maps = new ArrayList<>();
 		maps.add(map);
+		
+
 
 		when(cityService.listAll()).thenReturn((List) cities);
 		when(weatherService.listAll()).thenReturn((List) weathers);
