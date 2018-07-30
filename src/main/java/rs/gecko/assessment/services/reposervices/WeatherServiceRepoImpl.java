@@ -66,7 +66,8 @@ public class WeatherServiceRepoImpl implements WeatherService {
 
 		Weather weather = weatherRepository.save(domainObject);
 		if (weather.isEnabled()) {
-			logActiveConfigsController.addLog(new LogActiveConfigs(weather.getId(), new Date()));
+			logActiveConfigsController.addLog(new LogActiveConfigs(weather.getId(), weather.getUrl(),
+					weather.getParametars(), weather.getApiKey(), new Date()));
 		}
 
 		return weather;

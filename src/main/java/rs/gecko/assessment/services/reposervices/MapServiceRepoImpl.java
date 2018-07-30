@@ -67,7 +67,8 @@ public class MapServiceRepoImpl implements MapService {
 		Maps map = mapRepository.save(domainObject);
 
 		if (map.isEnabled()) {
-			logActiveConfigsController.addLog(new LogActiveConfigs(map.getId(), new Date()));
+			logActiveConfigsController
+					.addLog(new LogActiveConfigs(map.getId(), map.getUrl(), map.getParametars(), "", new Date()));
 		}
 
 		return map;

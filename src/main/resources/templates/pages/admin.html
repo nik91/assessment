@@ -26,7 +26,7 @@
 
 					</div>
 				</div>
-			</div>
+			</div>{}
 
 			<section class="content">
 				<div class="container-fluid">
@@ -69,12 +69,12 @@
 										<span>(</span>
 										<span th:text="#{admin.map}">Map</span>
 										<span>:</span>
-												<strong th:text="${mapconfig}"></strong>
-										<span>, </span>	
+										<strong th:text="${mapconfig}"></strong>
+										<span>, </span>
 										<span th:text="#{admin.weather}">Weather</span>
 										<span>:</span>
-												<strong th:text="${weatherconfig}"></strong>
-											
+										<strong th:text="${weatherconfig}"></strong>
+
 										<span>)</span>
 									</div>
 									<!-- /.info-box-content -->
@@ -128,14 +128,59 @@
 
 				</div>
 			</section>
-			
-			<div class="row" th:if="${not #lists.isEmpty(logHistory)}">
-				<div class="col-12 col-sm-6 col-md-3" th:each="logh : ${logHistory}">
-					<b th:text="${logh.configId}"></b>
-					<b th:text="${logh.lastUsed}"></b>
+
+
+			<div class="col-12" th:if="${not #lists.isEmpty(logHistory)}">
+
+				<div class="card">
+					<div class="card-header">
+						<h3 class="card-title" th:text="#{admin.config.list.through.time}">Listo of configs used through time</h3>
+
+
+					</div>
+					<div class="card-body">
+
+
+						<table class="table table-hover">
+							<thead>
+
+
+								<tr>
+									<th th:text="#{admin.config.name}">Api Config</th>
+									<th th:text="#{admin.config.id}">Config ID</th>
+									<th th:text="#{admin.config.url}">url</th>
+									<th th:text="#{admin.config.parametars}">Parametars</th>
+									<th th:text="#{admin.config.apikey}">Api Key</th>
+									<th th:text="#{admin.config.last.used}">Last used</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr th:each="logh : ${logHistory}">
+									<td th:text="${logh.apiKey} == '' ? #{apiForm.maps} : #{apiForm.weather}">Other browsers</td>
+									<td th:text="${logh.configId}">All others</td>
+									<td th:text="${logh.url}">-</td>
+									<td th:text="${logh.parametars}">-</td>
+									<td th:text="${logh.apiKey}">-</td>
+									<td th:text="${logh.lastUsed}">-</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<tr>
+									<th th:text="#{admin.config.name}">Api Config</th>
+									<th th:text="#{admin.config.id}">Config ID</th>
+									<th th:text="#{admin.config.url}">url</th>
+									<th th:text="#{admin.config.parametars}">Parametars</th>
+									<th th:text="#{admin.config.apikey}">Api Key</th>
+									<th th:text="#{admin.config.last.used}">Last used</th>
+								</tr>
+							</tfoot>
+						</table>
+					</div>
 				</div>
+
 			</div>
-			
+
 		</div>
 
 	</div>
