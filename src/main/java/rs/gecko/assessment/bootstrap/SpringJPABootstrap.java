@@ -5,7 +5,6 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import rs.gecko.assessment.controllers.LogAcitveConfigsController;
 import rs.gecko.assessment.domain.City;
 import rs.gecko.assessment.domain.api.Maps;
 import rs.gecko.assessment.domain.api.Weather;
@@ -38,7 +37,6 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 	public void onApplicationEvent(ContextRefreshedEvent event) {
 		loadCities();
 		loadConfig();
-		LogAcitveConfigsController logActiveConfigsController = new LogAcitveConfigsController();
 	}
 
 
@@ -52,18 +50,6 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 		map.setUrl("https://nominatim.openstreetmap.org/search/");
 		mapService.saveOrUpdate(map);
 
-		Maps map1 = new Maps();
-		map1.setEnabled(false);
-		map1.setParametars("?format=json");
-		map1.setUrl("https://nominatim.openstreetmap.org/search/");
-		mapService.saveOrUpdate(map1);
-
-		Maps map2 = new Maps();
-		map2.setEnabled(false);
-		map2.setParametars("?format=json");
-		map2.setUrl("https://nominatim.openstreetmap.org/search/");
-		mapService.saveOrUpdate(map2);
-
 		Weather weather = new Weather();
 		weather.setEnabled(true);
 		weather.setApiKey("5cf206b12a8b4ca9e171d70bdb6be856");
@@ -71,40 +57,16 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 		weather.setUrl("http://api.openweathermap.org/data/2.5/weather?q=");
 		weatherService.saveOrUpdate(weather);
 
-		Weather weather1 = new Weather();
-		weather1.setEnabled(false);
-		weather1.setApiKey("5cf206b12a8b4ca9e171d70bdb6be856");
-		weather1.setParametars("&cnt=3");
-		weather1.setUrl("http://api.openweathermap.org/data/2.5/weather?q=");
-		weatherService.saveOrUpdate(weather1);
-
 	}
 
 	/**
 	 * Populate Cities to database
 	 */
 	private void loadCities() {
-
 		City city = new City();
-		city.setName("Belgrede");
-		city.setState("");
+		city.setName("Gornji Milanovac");
+		city.setState("RS");
 		cityService.saveOrUpdate(city);
-
-		City city1 = new City();
-		city1.setName("Novi Sad");
-		city1.setState("RS");
-		cityService.saveOrUpdate(city1);
-
-		City city2 = new City();
-		city2.setName("Gornji Milanovac");
-		city2.setState("RS");
-		cityService.saveOrUpdate(city2);
-
-		City city3 = new City();
-		city3.setName("Beograd");
-		city3.setState("RS");
-		cityService.saveOrUpdate(city3);
-
 	}
 
 }
